@@ -6,6 +6,7 @@
   require_once(__DIR__.'/../../src/factory/DeviceFactory.php'); 
   
 class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
+    private static $con;
     
     public static function setUpBeforeClass() {
       $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);  

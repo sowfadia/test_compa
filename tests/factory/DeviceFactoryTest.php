@@ -9,6 +9,7 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
     
     public static function setUpBeforeClass() {
       $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);  
+      self::$con = $con;
     }
     
     /**
@@ -23,7 +24,7 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
      * @test
      */
     public function shouldGetDevices(){
-        DeviceFactory::getInstance()->setConnection($con);
+        DeviceFactory::getInstance()->setConnection($this->con);
         $this->assertTrue(DeviceFactory::getInstance()->isConnectionSet());
         $devices = DeviceFactory::getInstance()->getDevices();
         $this->assertNotNull($devices);

@@ -81,9 +81,9 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
         UserFactory::getInstance()->createUser($user);
         $criteria = " COALESCE(email, '') like" . $user->getEmail(). "'";
         $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);
-        assertNotNull($USER_FROM_DB);
+        $this->assertNotNull($USER_FROM_DB);
         $return = UserFactory::getInstance()->findUserById($USER_FROM_DB[0]['id']);
-        assertNotNull($return);
+        $this->assertNotNull($return);
         UserFactory::getInstance()->deleteUser($USER_FROM_DB[0]['id']);
     } 
     
@@ -107,8 +107,8 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
        $criteria = " COALESCE(email, '') like" . $user->getEmail(). "'";
        $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);
        $nbrow = UserFactory::getInstance()->deleteUser($USER_FROM_DB[0]['id']);
-       assertNotNull($nbrow);
-       assertTrue($nbrow>0);
+       $this->assertNotNull($nbrow);
+       $this->assertTrue($nbrow>0);
     }
     
      /**

@@ -52,7 +52,7 @@ class SearchFactoryTest extends PHPUnit_Framework_TestCase {
     public function shouldFindSearch(){
         SearchFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
         $return=SearchFactory::getInstance()->findSearchById(1);
-        assertNotNull($return);
+        $this->assertNotNull($return);
     } 
     
 }

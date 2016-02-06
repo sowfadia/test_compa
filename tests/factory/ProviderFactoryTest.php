@@ -33,7 +33,7 @@ class ProviderFactoryTest extends PHPUnit_Framework_TestCase {
     public function shouldGetProviders(){
         ProviderFactory::getInstance()->setConnection(self::$con);
         $this->assertTrue(ProviderFactory::getInstance()->isConnectionSet());
-        $providers = UserFactory::getInstance()->getProviders();
+        $providers = ProviderFactory::getInstance()->getProviders();
         $this->assertNotNull($providers);
     } 
     
@@ -52,7 +52,7 @@ class ProviderFactoryTest extends PHPUnit_Framework_TestCase {
     public function shouldFindProvider(){
         ProviderFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
         $return=ProviderFactory::getInstance()->findProviderById(1);
-        assertNotNull($return);
+        $this->assertNotNull($return);
     } 
     
 }

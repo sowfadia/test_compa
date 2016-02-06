@@ -42,7 +42,7 @@ class ProviderFactoryTest extends PHPUnit_Framework_TestCase {
      * @expectedException ConnectionNotSetException
      */
     public function shouldNotFindProvider(){
-        ProviderFactory::getInstance()->setConnection(null);//to unset the connection already set before
+        ProviderFactory::getInstance()->unsetConnection();//to unset the connection already set before
         ProviderFactory::getInstance()->findProviderById(1);
     } 
     

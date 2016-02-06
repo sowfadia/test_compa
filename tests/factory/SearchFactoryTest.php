@@ -42,7 +42,7 @@ class SearchFactoryTest extends PHPUnit_Framework_TestCase {
      * @expectedException ConnectionNotSetException
      */
     public function shouldNotFindSearch(){
-        SearchFactory::getInstance()->setConnection(null);//to unset the connection already set before
+        SearchFactory::getInstance()->unsetConnection();//to unset the connection already set before
         SearchFactory::getInstance()->findSearchById(1);
     } 
     

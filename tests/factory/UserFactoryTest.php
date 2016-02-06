@@ -49,7 +49,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
      * @expectedException ConnectionNotSetException
      */
     public function shouldNotGetUsers(){
-        UserFactory::getInstance()->setConnection(null);
+        UserFactory::getInstance()->unsetConnection();
         UserFactory::getInstance()->getUsers();
     }   
     
@@ -68,7 +68,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
      * @expectedException ConnectionNotSetException
      */
     public function shouldNotFindUser(){
-        UserFactory::getInstance()->setConnection(null);//to unset the connection already set before
+        UserFactory::getInstance()->unsetConnection();//to unset the connection already set before
         UserFactory::getInstance()->findUserById(1);
     } 
     
@@ -116,7 +116,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
      * @expectedException ConnectionNotSetException
      */
     public function shouldNotUpdateUserUser(){
-        UserFactory::getInstance()->setConnection(null);//to unset the connection already set before
+        UserFactory::getInstance()->unsetConnection();//to unset the connection already set before
         UserFactory::getInstance()->findUserById(1);
     } 
     

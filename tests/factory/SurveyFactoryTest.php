@@ -42,7 +42,7 @@ class SurveyFactoryTest extends PHPUnit_Framework_TestCase {
      * @expectedException ConnectionNotSetException
      */
     public function shouldNotFindSurvery(){
-        SurveyFactory::getInstance()->setConnection(null);//to unset the connection already set before
+        SurveyFactory::getInstance()->unsetConnection();//to unset the connection already set before
         SurveyFactory::getInstance()->findSearchById(1);
     } 
     

@@ -32,7 +32,7 @@ class SurveyFactoryTest extends PHPUnit_Framework_TestCase {
      */
     public function shouldGetSurverys(){
         SurveyFactory::getInstance()->setConnection(self::$con);
-        $this->assertTrue(SurveryFactory::getInstance()->isConnectionSet());
+        $this->assertTrue(SurveyFactory::getInstance()->isConnectionSet());
         $surverys = SurveyFactory::getInstance()->getSurveys();
         $this->assertNotNull($surverys);
     }  

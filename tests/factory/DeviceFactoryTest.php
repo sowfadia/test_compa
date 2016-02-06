@@ -25,7 +25,7 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
      * @test
      */
     public function shouldGetDevices(){
-        DeviceFactory::getInstance()->setConnection($this->con);
+        DeviceFactory::getInstance()->setConnection(self::$con);
         $this->assertTrue(DeviceFactory::getInstance()->isConnectionSet());
         $devices = DeviceFactory::getInstance()->getDevices();
         $this->assertNotNull($devices);

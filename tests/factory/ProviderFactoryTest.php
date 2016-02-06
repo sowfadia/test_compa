@@ -12,8 +12,11 @@
  */
 class ProviderFactoryTest extends PHPUnit_Framework_TestCase {
     
+    private static $con;
+    
     public static function setUpBeforeClass() {
       $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);  
+      self::$con = $con;
     }
     
     /**
@@ -28,7 +31,7 @@ class ProviderFactoryTest extends PHPUnit_Framework_TestCase {
      * @test
      */
     public function shouldGetProviders(){
-        ProviderFactory::getInstance()->setConnection($con);
+        ProviderFactory::getInstance()->setConnection(self::$con);
         $this->assertTrue(ProviderFactory::getInstance()->isConnectionSet());
         $providers = UserFactory::getInstance()->getProviders();
         $this->assertNotNull($providers);
@@ -47,7 +50,7 @@ class ProviderFactoryTest extends PHPUnit_Framework_TestCase {
      * @test
      */
     public function shouldFindProvider(){
-        ProviderFactory::getInstance()->setConnection($con);//to unset the connection already set before
+        ProviderFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
         $return=ProviderFactory::getInstance()->findProviderById(1);
         assertNotNull($return);
     } 

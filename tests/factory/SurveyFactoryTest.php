@@ -12,9 +12,12 @@
  */
 class SurveyFactoryTest extends PHPUnit_Framework_TestCase {
     
+    private static $con;
+    
     public static function setUpBeforeClass() {
       $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);  
-    }
+      self::$con = $con;
+    } 
     
      /**
      * @test
@@ -28,7 +31,7 @@ class SurveyFactoryTest extends PHPUnit_Framework_TestCase {
      * @test
      */
     public function shouldGetSurverys(){
-        SurveyFactory::getInstance()->setConnection($con);
+        SurveyFactory::getInstance()->setConnection(self::$con);
         $this->assertTrue(SurveryFactory::getInstance()->isConnectionSet());
         $surverys = UserFactory::getInstance()->getSurverys();
         $this->assertNotNull($surverys);
@@ -47,7 +50,7 @@ class SurveyFactoryTest extends PHPUnit_Framework_TestCase {
      * @test
      */
     public function shouldFindSurvery(){
-        SurveyFactory::getInstance()->setConnection($con);//to unset the connection already set before
+        SurveyFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
         $return=SurveryFactory::getInstance()->findSurveryById(1);
         assertNotNull($return);
     } 

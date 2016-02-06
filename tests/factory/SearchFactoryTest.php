@@ -12,9 +12,12 @@
  */
 class SearchFactoryTest extends PHPUnit_Framework_TestCase {
     
+    private static $con;
+    
     public static function setUpBeforeClass() {
       $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);  
-    }
+      self::$con = $con;
+    } 
     
      /**
      * @test
@@ -28,7 +31,7 @@ class SearchFactoryTest extends PHPUnit_Framework_TestCase {
      * @test
      */
     public function shouldGetSearches(){
-        SearchFactory::getInstance()->setConnection($con);
+        SearchFactory::getInstance()->setConnection(self::$con);
         $this->assertTrue(SearchFactory::getInstance()->isConnectionSet());
         $searches = UserFactory::getInstance()->getSearches();
         $this->assertNotNull($searches);
@@ -47,7 +50,7 @@ class SearchFactoryTest extends PHPUnit_Framework_TestCase {
      * @test
      */
     public function shouldFindSearch(){
-        SearchFactory::getInstance()->setConnection($con);//to unset the connection already set before
+        SearchFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
         $return=SearchFactory::getInstance()->findSearchById(1);
         assertNotNull($return);
     } 

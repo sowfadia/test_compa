@@ -44,7 +44,7 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
      * @test
      */
     public function shouldFindDEvice(){
-        DeviceFactory::getInstance()->setConnection($con);//to unset the connection already set before
+        DeviceFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
         $return=DeviceFactory::getInstance()->findDeviceById(1);
         assertNotNull($return);
     }    
@@ -67,7 +67,7 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
      * @test
      */
     public function shouldExecuteCriteriaQuery(){
-        DeviceFactory::getInstance()->setConnection($con);//to unset the connection already set before
+        DeviceFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
         DeviceFactory::getInstance()->findByCriteriaImpl("Samsung",null,
                 null,null,null,null,null,null,null,null,null,null,
                 null,null,null,null,null,null,null,null,null,null,

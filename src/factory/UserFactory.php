@@ -1,5 +1,8 @@
 <?php
 
+require_once ('Factory.php');
+require_once (__DIR__.'/../model/User.php');
+
 /**
  * The factory in charge of managing Users
  *
@@ -79,7 +82,8 @@ class UserFactory extends Factory{
      * @param type $user
      * @return type
      */
-    protected function toSql(User $user) {
+    protected function toSql($user1) {
+        $user = (User) $user1;
        return "(".$user->getId().",".$user->getFirstName().",".$user->getLastName().",".$user->getAdresse().","
                .$user->getEmail().",".$user->getLogin().",".$user->getPassword().","
                .$user->getTelephone().",".$user->getModalite().$user->getDateInsert().")";

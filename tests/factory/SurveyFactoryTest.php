@@ -21,7 +21,7 @@ class SurveyFactoryTest extends PHPUnit_Framework_TestCase {
      * @expectedException ConnectionNotSetException
      */
     public function shouldNotGetSurvereys(){
-        SurveryFactory::getInstance()->getSurveys();
+        SurveyFactory::getInstance()->getSurveys();
     }  
     
     /**

@@ -17,7 +17,7 @@ class User {
     private $modalite;
     private $dateInsert;
     
-    function __construct($id, $firstName, $lastName, $email, $telephone, $adresse,$login, $password, \Modalite $modalite,$dateInsert) {
+    function __construct($id, $firstName, $lastName, $email, $telephone, $adresse,$login, $password,$modalite,$dateInsert) {
         $this->id = $id;
         $this->firstName = $firstName;
         $this->lastName = $lastName;

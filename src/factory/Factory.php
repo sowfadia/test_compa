@@ -30,7 +30,7 @@ abstract class Factory {
      * Sets the Factory's connection to the DB
      * @param Connection $connection
      */
-    public function setConnection(Connection $connection) {
+    public function setConnection($connection) {
       if(!$connection->isConnected()){
         $connection->connect();
       }

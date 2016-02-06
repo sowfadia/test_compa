@@ -55,11 +55,7 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
      */
     public function shouldNotExecuteCriteriaQuery(){
         DeviceFactory::getInstance()->setConnection(null);//to unset the connection already set before
-        DeviceFactory::getInstance()->findByCriteriaImpl(null,null,
-                null,null,null,null,null,null,null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,
-                null,null,null,null,null);
+        DeviceFactory::getInstance()->findByCriteriaImpl(array(),null);
     } 
     
      
@@ -68,11 +64,9 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
      */
     public function shouldExecuteCriteriaQuery(){
         DeviceFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
-        DeviceFactory::getInstance()->findByCriteriaImpl("Samsung",null,
-                null,null,null,null,null,null,null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,
-                null,null,null,null,null,null,null,null,null,null,
-                null,null,null,null,null);
+        $criteria = array();
+        $criteria['brand'] = "Samsung";
+        DeviceFactory::getInstance()->findByCriteriaImpl($criteria,null);
     } 
     
 }

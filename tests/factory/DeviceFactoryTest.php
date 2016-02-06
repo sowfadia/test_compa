@@ -46,7 +46,7 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
     public function shouldFindDEvice(){
         DeviceFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
         $return=DeviceFactory::getInstance()->findDeviceById(1);
-        assertNotNull($return);
+        $this->assertNotNull($return);
     }    
     
     /**

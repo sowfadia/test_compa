@@ -51,7 +51,7 @@ class SurveyFactoryTest extends PHPUnit_Framework_TestCase {
      */
     public function shouldFindSurvery(){
         SurveyFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
-        $return=SurveyFactory::getInstance()->findSurveryById(1);
+        $return=SurveyFactory::getInstance()->findSurveyById(1);
         $this->assertNotNull($return);
     } 
   

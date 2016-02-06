@@ -28,7 +28,7 @@ class SurveyFactoryTest extends PHPUnit_Framework_TestCase {
      * @test
      */
     public function shouldGetSurverys(){
-        SurveryFactory::getInstance()->setConnection($con);
+        SurveyFactory::getInstance()->setConnection($con);
         $this->assertTrue(SurveryFactory::getInstance()->isConnectionSet());
         $surverys = UserFactory::getInstance()->getSurverys();
         $this->assertNotNull($surverys);
@@ -39,15 +39,15 @@ class SurveyFactoryTest extends PHPUnit_Framework_TestCase {
      * @expectedException ConnectionNotSetException
      */
     public function shouldNotFindSurvery(){
-        SearchFactory::getInstance()->setConnection(null);//to unset the connection already set before
-        SearchFactory::getInstance()->findSearchById(1);
+        SurveyFactory::getInstance()->setConnection(null);//to unset the connection already set before
+        SurveyFactory::getInstance()->findSearchById(1);
     } 
     
     /**
      * @test
      */
     public function shouldFindSurvery(){
-        SurveryFactory::getInstance()->setConnection($con);//to unset the connection already set before
+        SurveyFactory::getInstance()->setConnection($con);//to unset the connection already set before
         $return=SurveryFactory::getInstance()->findSurveryById(1);
         assertNotNull($return);
     } 

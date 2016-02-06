@@ -79,7 +79,7 @@ class UserFactory extends Factory{
      * @param type $user
      * @return type
      */
-    protected function toSql($user) {
+    protected function toSql(User $user) {
        return "(".$user->getId().",".$user->getFirstName().",".$user->getLastName().",".$user->getAdresse().","
                .$user->getEmail().",".$user->getLogin().",".$user->getPassword().","
                .$user->getTelephone().",".$user->getModalite().$user->getDateInsert().")";

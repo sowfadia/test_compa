@@ -33,7 +33,7 @@ class SearchFactoryTest extends PHPUnit_Framework_TestCase {
     public function shouldGetSearches(){
         SearchFactory::getInstance()->setConnection(self::$con);
         $this->assertTrue(SearchFactory::getInstance()->isConnectionSet());
-        $searches = UserFactory::getInstance()->getSearches();
+        $searches = SearchFactory::getInstance()->getSearches();
         $this->assertNotNull($searches);
     }
     

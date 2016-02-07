@@ -85,9 +85,8 @@ class UserFactory extends Factory{
      */
     protected function toSql($user) {
         if(!is_null($user) && ($user instanceof User)){
-            return "(".$user->getId().",".$user->getFirstName().",".$user->getLastName().",".$user->getAdresse().","
-               .$user->getEmail().",".$user->getLogin().",".$user->getPassword().","
-               .$user->getTelephone().",".$user->getModalite().$user->getDateInsert().")";
+            return "(".$user->getId().",".$user->getEmail().$user->getPassword().","
+                    .$user->getFirstName().",".$user->getLastName().$user->getDateInsert().")";
         }
         throw new Exception("the parameter is not an instantance of User", null, null);
    }
@@ -101,9 +100,7 @@ class UserFactory extends Factory{
         return new User(
           $record['id'],$record['firstName'],
           $record['lastName'],$record['email'],
-          $record['tel'], $record['adresse'],
-          $record['login'], $record['password'], 
-          $record['modalite'],$record['dateInsert']
+          $record['password'],$record['dateInsert']
         );
     }
     

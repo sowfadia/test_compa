@@ -10,24 +10,16 @@ class User {
     private $firstName;
     private $lastName;
     private $email;
-    private $telephone;
-    private $adresse;
-    private $login;
     private $password;
-    private $modalite;
     private $dateInsert;
     
-    function __construct($id, $firstName, $lastName, $email, $telephone, $adresse,$login, $password,$modalite,$dateInsert) {
+    function __construct($id, $firstName, $lastName, $email, $password, $dateInsert) {
         $this->id = $id;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;
-        $this->$telephone = $telephone;
-        $this->adresse = $adresse;
-        $this->login=$login;
         $this->password = $password;
-        $this->modalite = $modalite;
-        $this->dateInsert=$dateInsert;
+        $this->dateInsert = $dateInsert;
     }
     
     function getId() {
@@ -46,12 +38,12 @@ class User {
         return $this->email;
     }
 
-    function getTelephone() {
-        return $this->telephone;
+    function getPassword() {
+        return $this->password;
     }
 
-    function getAdresse() {
-        return $this->adresse;
+    function getDateInsert() {
+        return $this->dateInsert;
     }
 
     function setId($id) {
@@ -70,42 +62,11 @@ class User {
         $this->email = $email;
     }
 
-    function setTelephone($telephone) {
-        $this->telephone = $telephone;
-    }
-
-    function setAdresse($adresse) {
-        $this->adresse = $adresse;
-    }
-
-    function getPassword() {
-        return $this->password;
-    }
-
-    function getModalite() {
-        return $this->modalite;
-    }
     function setPassword($password) {
         $this->password = $password;
-    }
-
-    function setModalite($modalite) {
-        $this->modalite = $modalite;
-    }
-    
-    function getLogin() {
-        return $this->login;
-    }
-    function setLogin($login) {
-        $this->login = $login;
-    }
-    
-    function getDateInsert() {
-        return $this->dateInsert;
     }
 
     function setDateInsert($dateInsert) {
         $this->dateInsert = $dateInsert;
     }
-
 }

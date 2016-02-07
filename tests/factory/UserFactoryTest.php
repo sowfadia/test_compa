@@ -20,7 +20,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
      * @expectedException ConnectionNotSetException
      */
     public function shouldNotCreateUser(){
-       $user=new User(-1,"fds", "fds", "fds", "fds", "Lille1", "fds", "fds", "sms", new DateTime());
+       $user=new User(-1,"fds", "fds", "fds", "fds", new DateTime());
        $nbrow = UserFactory::getInstance()->createUser($user);
     }
     
@@ -38,7 +38,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
      * @test
      */
     public function shouldCreateUser(){
-        $user=new User(-1,"fds", "fds", "fds", "fds", "Lille1", "fds", "fds", "sms", (new DateTime())->getTimestamp());
+       $user=new User(-1,"fds", "fds", "fds", "fds", new DateTime());
         UserFactory::getInstance()->setConnection(self::$con);
         $this->assertTrue(UserFactory::getInstance()->isConnectionSet());
         try {
@@ -83,7 +83,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
     public function shouldFindUser(){
         UserFactory::getInstance()->setConnection(self::$con);
         $this->assertTrue(UserFactory::getInstance()->isConnectionSet());
-        $user=new User(-1,"XXX", "XXX", "sowfadia@hotmail.com", "XXX", "XXX", "XXX", "XXX", "sms", (new DateTime())->getTimestamp());
+        $user=new User(-1,"XXX", "XXX", "sowfadia@hotmail.com", "XXX",(new DateTime())->getTimestamp());
         UserFactory::getInstance()->createUser($user);
         $criteria = " COALESCE(email, '') like" . $user->getEmail(). "'";
         $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);
@@ -98,7 +98,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
      * @expectedException ConnectionNotSetException
      */
     public function shouldNotDeleteUser(){
-       $user=new User(-1,"XXX", "XXX", "sowfadia@hotmail.com", "XXX", "XXX", "XXX", "XXX", "sms", (new DateTime())->getTimestamp());
+       $user=new User(-1,"XXX", "XXX", "sowfadia@hotmail.com", "XXX",(new DateTime())->getTimestamp());
        UserFactory::getInstance()->createUser($user);
        UserFactory::getInstance()->unsetConnection();
        UserFactory::getInstance()->deleteUser(0);

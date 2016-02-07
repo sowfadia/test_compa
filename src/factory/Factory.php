@@ -108,7 +108,7 @@ abstract class Factory {
             $record=$this->connection->executeQuery($sql);
             if($record){
                 foreach ($record as $object){
-                    array_push($objects,$this->toObject($object));
+                    $objects[] = $this->toObject($object);
                 }
             }
             return $objects;

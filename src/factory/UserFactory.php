@@ -89,7 +89,7 @@ class UserFactory extends Factory{
                .$user->getEmail().",".$user->getLogin().",".$user->getPassword().","
                .$user->getTelephone().",".$user->getModalite().$user->getDateInsert().")";
         }
-        return null;
+        throw new Exception("the parameter is not an instantance of User", null, null);
    }
    
     /**

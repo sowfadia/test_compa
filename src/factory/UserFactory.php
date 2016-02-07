@@ -86,7 +86,7 @@ class UserFactory extends Factory{
     protected function toSql($user) {
         if(!is_null($user) && ($user instanceof User)){
             return "insert into compa.users(\"email\",\"password\",\"firstname\",\"lastname\") values ('".$user->getEmail()."','".$user->getPassword()."','"
-                    .$user->getFirstName()."',".$user->getLastName()."')";
+                    .$user->getFirstName()."','".$user->getLastName()."')";
         }
         throw new Exception("the parameter is not an instantance of User", null, null);
    }

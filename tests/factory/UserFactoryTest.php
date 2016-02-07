@@ -85,7 +85,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
         $this->assertTrue(UserFactory::getInstance()->isConnectionSet());
         $user=new User(-1,"XXX", "XXX", "sowfadia@hotmail.com", "XXX",(new DateTime())->getTimestamp());
         UserFactory::getInstance()->createUser($user);
-        $criteria = " COALESCE(email, '') like " . $user->getEmail(). "'";
+        $criteria = "email like " . $user->getEmail(). "'";
         $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);
         $this->assertNotNull($USER_FROM_DB);
         $return = UserFactory::getInstance()->findUserById($USER_FROM_DB[0]['id']);

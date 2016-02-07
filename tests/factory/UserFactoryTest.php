@@ -4,6 +4,7 @@
   require_once(__DIR__.'/../../src/utils/Connection.php'); 
   require_once(__DIR__.'/../../src/model/User.php'); 
   require_once(__DIR__.'/../../src/factory/UserFactory.php'); 
+  require_once (__DIR__.'/../../src/exception/ConnectionNotSetException.php');
 
 class UserFactoryTest extends PHPUnit_Framework_TestCase{
     

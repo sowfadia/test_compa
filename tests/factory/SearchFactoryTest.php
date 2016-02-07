@@ -4,6 +4,7 @@
   require_once(__DIR__.'/../../src/utils/Connection.php'); 
   require_once(__DIR__.'/../../src/model/Search.php'); 
   require_once(__DIR__.'/../../src/factory/SearchFactory.php'); 
+  require_once (__DIR__.'/../../src/exception/ConnectionNotSetException.php');
 
 /**
  * Description of SearchFactoryTest

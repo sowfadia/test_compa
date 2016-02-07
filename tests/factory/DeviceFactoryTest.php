@@ -4,6 +4,7 @@
   require_once(__DIR__.'/../../src/utils/Connection.php'); 
   require_once(__DIR__.'/../../src/model/Device.php'); 
   require_once(__DIR__.'/../../src/factory/DeviceFactory.php'); 
+  require_once (__DIR__.'/../../src/exception/ConnectionNotSetException.php');
   
 class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
     private static $con;

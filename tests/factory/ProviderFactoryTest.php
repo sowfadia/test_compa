@@ -4,6 +4,7 @@
   require_once(__DIR__.'/../../src/utils/Connection.php'); 
   require_once(__DIR__.'/../../src/model/Provider.php'); 
   require_once(__DIR__.'/../../src/factory/ProviderFactory.php'); 
+  require_once (__DIR__.'/../../src/exception/ConnectionNotSetException.php');
 
 /**
  * Description of ProviderFactoryTest

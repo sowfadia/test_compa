@@ -78,6 +78,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
      */
     public function shouldFindUser(){
         UserFactory::getInstance()->setConnection(self::$con);
+        $this->assertTrue(UserFactory::getInstance()->isConnectionSet());
         $user=new User(-1,"XXX", "XXX", "sowfadia@hotmail.com", "XXX", "XXX", "XXX", "XXX", "sms", (new DateTime())->getTimestamp());
         UserFactory::getInstance()->createUser($user);
         $criteria = " COALESCE(email, '') like" . $user->getEmail(). "'";

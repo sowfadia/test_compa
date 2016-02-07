@@ -195,7 +195,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase{
     public function shouldExecuteCreate(){
        $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);
        $con->connect();
-       $return=$con->executeCreate("insert into compa.users('email','password','firstname','lastname') values ('Fatou', 'SOW','sow@sow.fr','sow')");
+       $return=$con->executeCreate("insert into compa.users(\"email\",\"password\",\"firstname\",\"lastname\") values ('Fatou', 'SOW','sow@sow.fr','sow')");
        $this->assertNotNull($return);
     }
 }

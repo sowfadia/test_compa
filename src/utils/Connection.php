@@ -107,8 +107,10 @@ class Connection{
   public function executeCreate($sql){
     if($this->pdo != NULL && !is_null($sql) && !($sql == "")){
       $query=$this->pdo->prepare($sql);
-      $query->execute();
-      return $query->rowCount();
+      $returnedBool = $query->execute();
+      if($returnedBool) {
+          return $query->rowCount();
+      } else throw new Exception("Sql execution did not succeed", null, null);
     }
     throw new Exception("Connection not established yet or wrong sql", null, null);
   }

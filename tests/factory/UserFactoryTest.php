@@ -31,7 +31,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
     public function shouldNotCreateUser2(){
         UserFactory::getInstance()->setConnection(self::$con);
         $this->assertTrue(UserFactory::getInstance()->isConnectionSet());
-        UserFactory::getInstance()->createUser(null);
+        UserFactory::getInstance()->createUser(NULL);
     }    
     
     /**

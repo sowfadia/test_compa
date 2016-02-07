@@ -49,16 +49,6 @@ class ConnectionTest extends PHPUnit_Framework_TestCase{
        $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);
        $con->connect();
        $con->executeQuery("");
-    } 
-    
-    /**
-     * @test 
-     */
-    public function shouldExecuteQuery(){
-       $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);
-       $con->connect();
-       $return=$con->executeQuery("select * from compa.device");
-       $this->assertNotNull($return);
     }
     
      /**
@@ -109,16 +99,6 @@ class ConnectionTest extends PHPUnit_Framework_TestCase{
     
     }  
     
-    /**
-     * @test 
-     */
-    public function shouldExecuteUpdate(){
-       $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);
-       $con->connect();
-       $return=$con->executeUpdate("update compa.user set firstname = 'Fatou' where id=1");
-       $this->assertNotNull($return);
-    }
-    
      /**
      * @test 
      * @expectedException Exception
@@ -147,16 +127,6 @@ class ConnectionTest extends PHPUnit_Framework_TestCase{
        $con->connect();
        $con->executeDelete(null);
     
-    }  
-    
-    /**
-     * @test 
-     */
-    public function shouldExecuteDelete(){
-       $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);
-       $con->connect();
-       $return=$con->executeDelete("delete from compa.user where id=1");
-       $this->assertNotNull($return);//not null but can be 0 if there is no record identified by 1
     }
     
      /**
@@ -203,5 +173,8 @@ class ConnectionTest extends PHPUnit_Framework_TestCase{
        $updateReturn=$con->executeUpdate("update compa.users set firstname = 'Fatoumata' where id=".$QueryReturn[0]["id"]);
        $this->assertNotNull($updateReturn);
        $this->assertTrue($updateReturn == 1);
+       $deleteReturn=$con->executeDelete("delete from compa.user where id=".$QueryReturn[0]["id"]);
+       $this->assertNotNull($deleteReturn);
+       $this->assertTrue($deleteReturn == 1);
     }
 }

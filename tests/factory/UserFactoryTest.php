@@ -62,6 +62,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
         $this->assertTrue(UserFactory::getInstance()->isConnectionSet());
         $users = UserFactory::getInstance()->getUsers();
         $this->assertNotNull($users);
+        $this->assertTrue(count($users) > 0);
     }  
     
     /**
@@ -109,6 +110,25 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
     public function shouldNotUpdateUserUser(){
         UserFactory::getInstance()->unsetConnection();//to unset the connection already set before
         UserFactory::getInstance()->findUserById(1);
+    } 
+    
+    /**
+     * @test
+     * @expectedException ConnectionNotSetException
+     */
+    public function deleteRemainingAddedUsers(){
+        $criteria = "email like 'sowfadia@hotmail.com'";
+        $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);
+        $this->assertNotNull($USER_FROM_DB);
+        $nbrow = UserFactory::getInstance()->deleteUser($USER_FROM_DB[0]->getId());
+        $this->assertNotNull($nbrow);
+        $this->assertTrue($nbrow>0);
+        $criteria = "email like 'fds'";
+        $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);
+        $this->assertNotNull($USER_FROM_DB);
+        $nbrow = UserFactory::getInstance()->deleteUser($USER_FROM_DB[0]->getId());
+        $this->assertNotNull($nbrow);
+        $this->assertTrue($nbrow>0);
     } 
     
 }

@@ -5,7 +5,7 @@
   require_once(__DIR__.'/../../src/model/User.php'); 
   require_once(__DIR__.'/../../src/factory/UserFactory.php'); 
 
-class UserFactoryTest extends PHPUnit_Framework_TestCase {
+class UserFactoryTest extends PHPUnit_Framework_TestCase{
     
     private static $con;
     
@@ -107,8 +107,8 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase {
        $criteria = " COALESCE(email, '') like 'sowfadia@hotmail.com'";
        $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);
        $nbrow = UserFactory::getInstance()->deleteUser($USER_FROM_DB[0]['id']);
-//       $this->assertNotNull($nbrow);
-//       $this->assertTrue($nbrow>0);
+       $this->assertNotNull($nbrow);
+       $this->assertTrue($nbrow>0);
     }
     
      /**

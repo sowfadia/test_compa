@@ -114,7 +114,6 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
     
     /**
      * @test
-     * @expectedException ConnectionNotSetException
      */
     public function deleteRemainingAddedUsers(){
         $criteria = "email like'sowfadia@hotmail.com'";

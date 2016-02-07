@@ -110,6 +110,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
      */
     public function shouldDeleteUser(){
        UserFactory::getInstance()->setConnection(self::$con);
+       $this->assertTrue(UserFactory::getInstance()->isConnectionSet());
        $criteria = " COALESCE(email, '') like 'sowfadia@hotmail.com'";
        $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);
        $nbrow = UserFactory::getInstance()->deleteUser($USER_FROM_DB[0]['id']);

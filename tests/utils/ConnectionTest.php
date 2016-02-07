@@ -199,7 +199,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase{
 //       $this->assertNotNull($createReturn);
        $QueryReturn=$con->executeQuery("select * from compa.users where email like 'sow@sow.fr'");
        $this->assertNotNull($QueryReturn);
-       $this->assertTrue(count($QueryReturn) > 0);
+       $this->assertTrue(count($QueryReturn) < 0);
        $updateReturn=$con->executeUpdate("update compa.users set firstname = 'Fatoumata' where id=".$QueryReturn[0]["id"]);
        $this->assertNotNull($updateReturn);
        $this->assertTrue($updateReturn == 1);

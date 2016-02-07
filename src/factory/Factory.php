@@ -110,8 +110,8 @@ abstract class Factory {
                 foreach ($record as $object){
                     $objects[] = $this->toObject($object);
                 }
-                return $objects;
             }
+            return $objects;
         }
         throw new ConnectionNotSetException();
     }

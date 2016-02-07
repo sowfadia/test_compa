@@ -107,6 +107,6 @@ class UserFactory extends Factory{
     }
     
     public static function getTableName(){
-       return self::tableName;
+       return self::$tableName;
     }
 }

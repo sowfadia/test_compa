@@ -9,7 +9,7 @@ require_once (__DIR__.'/../model/User.php');
  * @author sowf
  */
 class UserFactory extends Factory{
-    private static $tableName="compa.user";
+    protected static $tableName = "compa.user";
   
       /**
      * The single instance of the factory
@@ -28,6 +28,7 @@ class UserFactory extends Factory{
     public static function getInstance(){
         if(is_null(self::$instance)) {
             self::$instance = new UserFactory();  
+            self::$tableName = "compa.user";
         }
         return self::$instance;
     }
@@ -38,7 +39,7 @@ class UserFactory extends Factory{
      * @return int, an integer corresponding to the number of lines deleted; 0 if the connection is not set yet or no line has been modified
      */
     public function getUsers() {
-        return parent::getAll($this->tableName);
+        return parent::getAll(self::$tableName);
     }
 
     /**
@@ -47,7 +48,7 @@ class UserFactory extends Factory{
      * @return int, an integer corresponding to the number of lines deleted; 0 if the connection is not set yet or no line has been modified
      */
     public function findUserById($id) {
-        return parent::findById($this->tableName, $id);
+        return parent::findById(self::$tableName, $id);
     }
     
     /**
@@ -56,7 +57,7 @@ class UserFactory extends Factory{
      * @return int, an integer corresponding to the number of lines deleted; 0 if the connection is not set yet or no line has been modified
      */
     public function deleteUser($id) {
-       return parent::delete($this->tableName, $id);
+       return parent::delete(self::$tableName, $id);
     }
     
     /**
@@ -66,7 +67,7 @@ class UserFactory extends Factory{
      * @return int, an integer corresponding to the number of lines updated; 0 if the connection is not set yet or no line has been modified
      */
     public function updateUser($id,$fields){
-        return parent::update($this->tableName, $id, $fields);
+        return parent::update(self::$tableName, $id, $fields);
     }
     
     /**
@@ -74,7 +75,7 @@ class UserFactory extends Factory{
      * @param type $user the new user
      */
     public function createUser($user){
-       return parent::create($this->tableName, $user);
+       return parent::create(self::$tableName, $user);
     }
     
     /**

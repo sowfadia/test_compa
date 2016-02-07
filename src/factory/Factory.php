@@ -125,7 +125,7 @@ abstract class Factory {
      */
     public function delete($tableName,$id) {
         if($this->isConnectionSet()){
-            $sql="delete from ".$tableName." where idProvider=".$id;
+            $sql="delete from ".$tableName." where id = ".$id;
             return $this->connection->executeDelete($sql);
             
         }

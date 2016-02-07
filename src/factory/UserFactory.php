@@ -75,7 +75,7 @@ class UserFactory extends Factory{
      * @param type $user the new user
      */
     public function createUser($user){
-       return parent::create(self::$tableName, $user);
+       return parent::create($user);
     }
     
     /**

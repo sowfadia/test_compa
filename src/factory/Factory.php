@@ -33,7 +33,7 @@ abstract class Factory {
     }
     
     public function unsetConnection() {
-      $this->connection = null;
+      $this->connection = NULL;
     }
     
      /**
@@ -41,7 +41,7 @@ abstract class Factory {
      * @return true if the connection has been initiated, false otherwise
      */
     public function isConnectionSet(){
-        return  $this->connection != null;
+        return ! is_null($this->connection);
     }
     
      /**

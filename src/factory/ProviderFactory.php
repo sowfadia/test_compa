@@ -105,5 +105,4 @@ class ProviderFactory extends Factory{
           $record['urlproducts']
         );
     }
-
 }

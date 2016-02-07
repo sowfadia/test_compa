@@ -106,7 +106,7 @@ abstract class Factory {
           $objects = array();  
             $sql="select * from ".$tableName." where ".$criteria;
             $record=$this->connection->executeQuery($sql);
-            if($record && (count($record) > 0)){
+            if($record){
                 foreach ($record as $object){
                     $objects[] = $this->toObject($object);
                 }

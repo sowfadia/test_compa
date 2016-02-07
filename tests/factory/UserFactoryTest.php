@@ -37,7 +37,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
      * @test
      */
     public function shouldCreateUser(){
-        $user=new User(-1,"fds", "fds", "fds", "fds", "Lille1", "fds", "fds", "sms", new DateTime());
+        $user=new User(-1,"fds", "fds", "fds", "fds", "Lille1", "fds", "fds", "sms", (new DateTime())->getTimestamp());
         UserFactory::getInstance()->setConnection(self::$con);
         $this->assertTrue(UserFactory::getInstance()->isConnectionSet());
         $nbrow = UserFactory::getInstance()->createUser($user);

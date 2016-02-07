@@ -9,7 +9,7 @@ require_once (__DIR__.'/../model/User.php');
  * @author sowf
  */
 class UserFactory extends Factory{
-    protected static $tableName = "compa.user";
+    protected static $tableName = "compa.users";
   
       /**
      * The single instance of the factory
@@ -28,7 +28,7 @@ class UserFactory extends Factory{
     public static function getInstance(){
         if(is_null(self::$instance)) {
             self::$instance = new UserFactory();  
-            self::$tableName = "compa.user";
+            self::$tableName = "compa.users";
         }
         return self::$instance;
     }

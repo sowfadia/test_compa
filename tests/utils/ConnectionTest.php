@@ -194,10 +194,9 @@ class ConnectionTest extends PHPUnit_Framework_TestCase{
      */
     public function shouldExecuteCRUD(){
        $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);
-       $con->connect();
-       $createReturn=$con->executeCreate("insert into compa.users(\"email\",\"password\",\"firstname\",\"lastname\") values ('Fatou', 'SOW','sow@sow.fr','sow')");
-       $this->assertNotNull($createReturn);
-       $QueryReturn = NULL;
+//       $con->connect();
+//       $createReturn=$con->executeCreate("insert into compa.users(\"email\",\"password\",\"firstname\",\"lastname\") values ('Fatou', 'SOW','sow@sow.fr','sow')");
+//       $this->assertNotNull($createReturn);
        $QueryReturn=$con->executeQuery("select * from compa.users where email like 'sow@sow.fr'");
        $this->assertNotNull($QueryReturn);
        $this->assertTrue(count($QueryReturn) > 0);

@@ -173,7 +173,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase{
        $updateReturn=$con->executeUpdate("update compa.users set firstname = 'Fatoumata' where id=".$QueryReturn[0]["id"]);
        $this->assertNotNull($updateReturn);
        $this->assertTrue($updateReturn == 1);
-       $deleteReturn=$con->executeDelete("delete from compa.user where id=".$QueryReturn[0]["id"]);
+       $deleteReturn=$con->executeDelete("delete from compa.users where id=".$QueryReturn[0]["id"]);
        $this->assertNotNull($deleteReturn);
        $this->assertTrue($deleteReturn == 1);
     }

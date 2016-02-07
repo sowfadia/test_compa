@@ -88,9 +88,9 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
         $criteria = "email like '" . $user->getEmail(). "'";
         $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);
         $this->assertNotNull($USER_FROM_DB);
-        $return = UserFactory::getInstance()->findUserById($USER_FROM_DB['id']);
+        $return = UserFactory::getInstance()->findUserById($USER_FROM_DB->getId());
         $this->assertNotNull($return);
-        $nbrow = UserFactory::getInstance()->deleteUser($USER_FROM_DB['id']);
+        $nbrow = UserFactory::getInstance()->deleteUser($USER_FROM_DB->getId());
         $this->assertNotNull($nbrow);
         $this->assertTrue($nbrow>0);
     } 

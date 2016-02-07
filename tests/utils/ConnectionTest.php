@@ -200,5 +200,6 @@ class ConnectionTest extends PHPUnit_Framework_TestCase{
        $return = NULL;
        $return=$con->executeQuery("select * from compa.users where email like 'sow@sow.fr'");
        $this->assertNotNull($return);
+       $this->assertTrue(count($return) > 0);
     }
 }

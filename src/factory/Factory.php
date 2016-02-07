@@ -13,11 +13,6 @@ abstract class Factory {
      */
     protected $connection;
     
-    /**
-     * The single instance of the factory
-     */
-    protected static $instance;
-    
      /**
      * Private constructor to avoid creating a new Factory
      * @param Connection $connection
@@ -46,7 +41,7 @@ abstract class Factory {
      * @return true if the connection has been initiated, false otherwise
      */
     public function isConnectionSet(){
-        return  !is_null($this->connection);
+        return  $this->connection != null;
     }
     
      /**

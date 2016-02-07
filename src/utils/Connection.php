@@ -58,12 +58,14 @@ class Connection{
     $record = array();
       if($this->pdo != NULL && !is_null($sql) && !($sql == "")){
         $query=$this->pdo->prepare($sql);
-        $query->execute();
-        while($row=$query->fetch()){
+        $returnedBool = $query->execute();
+        if($returnedBool) {
+            while($row=$query->fetch()){
            // $record[]=$row;
           array_push($record, $row);
         }
         return $record;
+        } else throw new Exception("Sql execution did not succeed with sql = ".$sql, null, null);
       }
       throw new Exception("Connection not established yet or wrong sql", null, null);
   }
@@ -77,8 +79,10 @@ class Connection{
   public function executeUpdate($sql){
     if($this->pdo != NULL && !is_null($sql) && !($sql == "")){
       $query=$this->pdo->prepare($sql);
-      $query->execute();
-      return $query->rowCount();
+      $returnedBool = $query->execute();
+      if($returnedBool) {
+          return $query->rowCount();
+      } else throw new Exception("Sql execution did not succeed with sql = ".$sql, null, null);
     }
     throw new Exception("Connection not established yet or wrong sql", null, null);
   } 
@@ -92,8 +96,10 @@ class Connection{
   public function executeDelete($sql){
    if($this->pdo != NULL && !is_null($sql) && !($sql == "")){
       $query=$this->pdo->prepare($sql);
-      $query->execute();
-      return $query->rowCount();
+      $returnedBool = $query->execute();
+      if($returnedBool) {
+          return $query->rowCount();
+      } else throw new Exception("Sql execution did not succeed with sql = ".$sql, null, null);
     }
     throw new Exception("Connection not established yet or wrong sql", null, null);
   }

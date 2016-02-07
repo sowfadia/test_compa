@@ -116,7 +116,8 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
      * @test
      */
     public function deleteRemainingAddedUsers(){
-        $criteria = "email like'sowfadia@hotmail.com'";
+        UserFactory::getInstance()->setConnection(self::$con);
+        $criteria = "email like 'sowfadia@hotmail.com'";
         $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);
         $this->assertNotNull($USER_FROM_DB);
         $nbrow = UserFactory::getInstance()->deleteUser($USER_FROM_DB[0]->getId());

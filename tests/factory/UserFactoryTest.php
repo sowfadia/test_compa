@@ -41,12 +41,8 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
        $user=new User(-1,"fds", "fds", "fds", "fds", new DateTime());
         UserFactory::getInstance()->setConnection(self::$con);
         $this->assertTrue(UserFactory::getInstance()->isConnectionSet());
-        try {
-            $nbrow = UserFactory::getInstance()->createUser($user);
-            $this->assertEquals(1,$nbrow);
-        } catch (Exception $exc) {
-            echo $exc->getTraceAsString();
-        }        
+        $nbrow = UserFactory::getInstance()->createUser($user);
+        $this->assertEquals(1,$nbrow);      
     }   
     
     /**

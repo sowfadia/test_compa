@@ -80,17 +80,19 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
     /**
      * @test
      */
-    public function shouldFindUser(){
+    public function shouldFindAndDeleteUser(){
         UserFactory::getInstance()->setConnection(self::$con);
         $this->assertTrue(UserFactory::getInstance()->isConnectionSet());
         $user=new User(-1,"XXX", "XXX", "sowfadia@hotmail.com", "XXX",(new DateTime())->getTimestamp());
         UserFactory::getInstance()->createUser($user);
-        $criteria = " COALESCE(email, '') like" . $user->getEmail(). "'";
+        $criteria = " COALESCE(email, '') like " . $user->getEmail(). "'";
         $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);
         $this->assertNotNull($USER_FROM_DB);
         $return = UserFactory::getInstance()->findUserById($USER_FROM_DB[0]['id']);
         $this->assertNotNull($return);
-        UserFactory::getInstance()->deleteUser($USER_FROM_DB[0]['id']);
+        $nbrow = UserFactory::getInstance()->deleteUser($USER_FROM_DB[0]['id']);
+        $this->assertNotNull($nbrow);
+        $this->assertTrue($nbrow>0);
     } 
     
      /**
@@ -103,20 +105,6 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
        UserFactory::getInstance()->unsetConnection();
        UserFactory::getInstance()->deleteUser(0);
     } 
-    
-    /**
-     * @test
-     * 
-     */
-    public function shouldDeleteUser(){
-       UserFactory::getInstance()->setConnection(self::$con);
-       $this->assertTrue(UserFactory::getInstance()->isConnectionSet());
-       $criteria = " COALESCE(email, '') like 'sowfadia@hotmail.com'";
-       $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);
-       $nbrow = UserFactory::getInstance()->deleteUser($USER_FROM_DB[0]['id']);
-       $this->assertNotNull($nbrow);
-       $this->assertTrue($nbrow>0);
-    }
     
      /**
      * @test

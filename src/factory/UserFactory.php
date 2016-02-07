@@ -98,9 +98,9 @@ class UserFactory extends Factory{
      */
     protected function toObject($record) {
         return new User(
-          $record['id'],$record['firstName'],
-          $record['lastName'],$record['email'],
-          $record['password'],$record['dateInsert']
+          $record['id'],$record['firstname'],
+          $record['lastname'],$record['email'],
+          $record['password'],$record['dateinsert']
         );
     }
     

@@ -158,9 +158,9 @@ abstract class Factory {
      * @param type $provider the new provider
      * @throws ConnectionNotSetException
      */
-    public function create($tableName,$object){
+    public function create($object){
          if($this->isConnectionSet()){
-             $sql="insert into ".$tableName." values".$this->toSql($object);
+             $sql = $this->toSql($object);
              return $this->connection->executeCreate($sql);
         }
         throw new ConnectionNotSetException();

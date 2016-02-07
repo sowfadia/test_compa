@@ -27,9 +27,8 @@ class ConnectionTest extends PHPUnit_Framework_TestCase{
      * @expectedException Exception
      */
     public function shouldThrowAnExcception2(){
-       $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);
+       $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,"xxxxx");
        $con->connect();
-       $con->executeQuery("");
     }
     
      /**
@@ -40,8 +39,17 @@ class ConnectionTest extends PHPUnit_Framework_TestCase{
        $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);
        $con->connect();
        $con->executeQuery(null);
-    
     }  
+    
+     /**
+     * @test 
+     * @expectedException Exception
+     */
+    public function shouldThrowAnExcception14(){
+       $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);
+       $con->connect();
+       $con->executeQuery("");
+    } 
     
     /**
      * @test 
@@ -49,7 +57,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase{
     public function shouldExecuteQuery(){
        $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);
        $con->connect();
-       $return=$con->executeQuery("select * from compa.user");
+       $return=$con->executeQuery("select * from compa.device");
        $this->assertNotNull($return);
     }
     
@@ -148,7 +156,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase{
        $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);
        $con->connect();
        $return=$con->executeDelete("delete from compa.user where id=1");
-       $this->assertNotNull($return);
+       $this->assertNotNull($return);//not null but can be 0 if there is no record identified by 1
     }
     
      /**

@@ -56,7 +56,7 @@ class Connection{
      */
   public function executeQuery($sql){
     $record = array();
-      if($this->pdo != NULL && !is_nan($sql && !($sql == ""))){
+      if($this->pdo != NULL && !is_null($sql) && !($sql == "")){
         $query=$this->pdo->prepare($sql);
         $query->execute();
         while($row=$query->fetch()){
@@ -65,7 +65,7 @@ class Connection{
         }
         return $record;
       }
-      throw new Exception("Connection is not established yet", null, null);
+      throw new Exception("Connection not established yet or wrong sql", null, null);
   }
   
     /**
@@ -75,12 +75,12 @@ class Connection{
      * @throws Exception, occur when the connection not yet established
      */
   public function executeUpdate($sql){
-    if($this->pdo != NULL && !is_nan($sql && !($sql == ""))){
+    if($this->pdo != NULL && !is_null($sql) && !($sql == "")){
       $query=$this->pdo->prepare($sql);
       $query->execute();
       return $query->rowCount();
     }
-    throw new Exception("Connection is not established yet", null, null);
+    throw new Exception("Connection not established yet or wrong sql", null, null);
   } 
   
     /**
@@ -90,12 +90,12 @@ class Connection{
      * @throws Exception, occur when the connection not yet established
      */
   public function executeDelete($sql){
-   if($this->pdo != NULL && !is_nan($sql && !($sql == ""))){
+   if($this->pdo != NULL && !is_null($sql) && !($sql == "")){
       $query=$this->pdo->prepare($sql);
       $query->execute();
       return $query->rowCount();
     }
-    throw new Exception("Connection is not established yet", null, null);
+    throw new Exception("Connection not established yet or wrong sql", null, null);
   }
   
   /**
@@ -105,12 +105,12 @@ class Connection{
      * @throws Exception, occur when the connection not yet established
      */
   public function executeCreate($sql){
-    if($this->pdo != NULL && !is_nan($sql && !($sql == ""))){
+    if($this->pdo != NULL && !is_null($sql) && !($sql == "")){
       $query=$this->pdo->prepare($sql);
       $query->execute();
       return $query->rowCount();
     }
-    throw new Exception("Connection is not established yet", null, null);
+    throw new Exception("Connection not established yet or wrong sql", null, null);
   }
   
 }

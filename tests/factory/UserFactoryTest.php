@@ -77,7 +77,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
      */
     public function shouldFindUser(){
         UserFactory::getInstance()->setConnection(self::$con);
-        $user=new User(-1,"XXX", "XXX", "sowfadia@hotmail.com", "XXX", "XXX", "XXX", "XXX", "sms", new DateTime());
+        $user=new User(-1,"XXX", "XXX", "sowfadia@hotmail.com", "XXX", "XXX", "XXX", "XXX", "sms", (new DateTime())->getTimestamp());
         UserFactory::getInstance()->createUser($user);
         $criteria = " COALESCE(email, '') like" . $user->getEmail(). "'";
         $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);
@@ -92,7 +92,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
      * @expectedException ConnectionNotSetException
      */
     public function shouldNotDeleteUser(){
-       $user=new User(-1,"XXX", "XXX", "sowfadia@hotmail.com", "XXX", "XXX", "XXX", "XXX", "sms", new DateTime());
+       $user=new User(-1,"XXX", "XXX", "sowfadia@hotmail.com", "XXX", "XXX", "XXX", "XXX", "sms", (new DateTime())->getTimestamp());
        UserFactory::getInstance()->createUser($user);
        UserFactory::getInstance()->setConnection(null);
        UserFactory::getInstance()->deleteUser(0);
@@ -104,7 +104,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
      */
     public function shouldDeleteUser(){
        UserFactory::getInstance()->setConnection(self::$con);
-       $criteria = " COALESCE(email, '') like" . $user->getEmail(). "'";
+       $criteria = " COALESCE(email, '') like 'sowfadia@hotmail.com'";
        $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);
        $nbrow = UserFactory::getInstance()->deleteUser($USER_FROM_DB[0]['id']);
        $this->assertNotNull($nbrow);

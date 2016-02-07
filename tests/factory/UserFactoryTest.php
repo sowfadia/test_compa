@@ -95,7 +95,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
     public function shouldNotDeleteUser(){
        $user=new User(-1,"XXX", "XXX", "sowfadia@hotmail.com", "XXX", "XXX", "XXX", "XXX", "sms", (new DateTime())->getTimestamp());
        UserFactory::getInstance()->createUser($user);
-       UserFactory::getInstance()->setConnection(null);
+       UserFactory::getInstance()->unsetConnection();
        UserFactory::getInstance()->deleteUser(0);
     } 
     

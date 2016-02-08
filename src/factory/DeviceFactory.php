@@ -76,7 +76,7 @@ class DeviceFactory extends Factory {
     }
 
     public function createDevice($device) {
-        return parent::create($this->tableName, $device);
+        return parent::create($device);
     }
 
     protected function toObject($record) {

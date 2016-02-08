@@ -96,16 +96,6 @@ class DeviceFactory extends Factory {
                 $record['externalstorage'], $record['software'], $record['image']
         );
     }
-    
-    private function paramToSql($param){
-      if(is_null($param)){
-         return "NULL"; 
-      }
-      if(is_bool($param) || is_numeric($param)){
-        return $param;  
-      }
-      return "'".$param."'";
-    }
 
     protected function toSql($device) {
         if(!is_null($device) && ($device instanceof Device)){

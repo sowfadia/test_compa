@@ -49,7 +49,17 @@ abstract class Factory {
      * @param Provider $object the provider
      * @return String, a string reprenting the object
      */
-    protected abstract function toSql($object); 
+    protected abstract function toSql($object);
+    
+    protected function paramToSql($param){
+      if(is_null($param)){
+         return "NULL"; 
+      }
+      if(is_bool($param) || is_numeric($param)){
+        return $param;  
+      }
+      return "'".$param."'";
+    }
     
     /**
      * Transform th given record into an object

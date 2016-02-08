@@ -56,45 +56,79 @@ class SearchFactory extends Factory{
     }
     
     public function createSearch(Search $search){
-        return parent::create($this->tableName, $object);
+        return parent::create($object);
     }
 
     protected function toObject($record) {
         return new Search(
-          $record['id'],$record['idUser'],
-          $record['brand'],$record['priceMin'],
-          $record['priceMax'], $record['warranty'],
+          $record['id'],$record['iduser'],
+          $record['brand'],$record['pricemin'],
+          $record['pricemax'], $record['warranty'],
           $record['waterproof'], $record['screenDefinition'],
-          $record['screenResolutionMin'],$record['screenResolutionMax'],
-          $record['screenSizeMin'],$record['screenSizeMax'],$record['screenPanel'],
-          $record['CPUModel'], $record['CPUFrequencyMin'], $record['CPUFrequencyMax'],
-          $record['CPUCoreMin'],$record['CPUCoreMax'],$record['RAMMin'],$record['RAMMax'],
-          $record['cameraResolutionMin'], $record['cameraResolutionMax'],
-          $record['frontCameraResolutionMin'],$record['frontCameraResolutionMax'],
-          $record['flash'],$record['sizeHeighMin'],$record['sizeHeighMax'],
-          $record['sizeWidthMin'], $record['sizeWidthMax'], $record['sizeThicknessMin'], 
-          $record['sizeThicknessMax'],$record['weightMin'],$record['weightMax'],
-          $record['batteryCapacityMin'],$record['batteryCapacityMax'],
-          $record['storageMin'], $record['storageMax'],$record['externalStorage'],
-          $record['software'],$record['dateInsert']
+          $record['screenResolutionmin'],$record['screenResolutionmax'],
+          $record['screensizemin'],$record['screensizemax'],$record['screenpanel'],
+          $record['cpumodel'], $record['cpufrequencymin'], $record['cpufrequencymax'],
+          $record['cpucoremin'],$record['cpucoremax'],$record['rammin'],$record['rammax'],
+          $record['cameraresolutionmin'], $record['cameraresolutionmax'],
+          $record['frontcameraresolutionmin'],$record['frontcameraresolutionmax'],
+          $record['flash'],$record['sizeheighmin'],$record['sizeheighmax'],
+          $record['sizewidthmin'], $record['sizewidthmax'], $record['sizethicknessmin'], 
+          $record['sizethicknessmax'],$record['weightmin'],$record['weightmax'],
+          $record['batteryCapacitymin'],$record['batteryCapacitymax'],
+          $record['storagemin'], $record['storagemax'],$record['externalstorage'],
+          $record['software'],$record['dateinsert']
         );
     }
 
     protected function toSql($search) {
-       return "(".$search->getId().",".$search->getUser().",".$search->getBrand().",".$search->getPriceMin().","
-               .$search->getPriceMax().",".$search->getWarranty().",".$search->getWaterproof().","
-               .$search->getScreenDefinition().",".$search->getScreenResolutionMin().",".$search->getScreenResolutionMax().","
-               .$search->getScreenSizeMin().",".$search->getScreenSizeMax().",".$search->getScreenPanel().","
-                .$search->getCPUModel().",".$search->getCPUFrequencyMin().",".$search->getCPUFrequencyMax().","
-                .$search->getCPUCoreMin().",".$search->getCPUCoreMax().",".$search->getRAMMin().","
-                .$search->getRAMMax().",".$search->getCameraResolutionMin().",".$search->getCameraResolutionMax().","
-                .$search->getFrontCameraResolutionMin().",".$search->getFrontCameraResolutionMax().",".$search->getFlash().","
-                .$search->getSizeHeighMin().",".$search->getSizeHeighMax().""
-                .$search->getSizeWidthMin().",".$search->getSizeWidthMax().",".$search->getSizeThicknessMin().","
-                .$search->getSizeThicknessMax().",".$search->getWeightMin().",".$search->getWeightMax().","
-                .$search->getBatteryCapacityMin().",".$search->getBatteryCapacityMax().",".$search->getStorageMin().","
-                .$search->getStorageMax().",".$search->getExternalStorage().",".$search->getSoftware().","
-                .$search->getDateInsert().")";
-    }
+        if(!is_null($device) && ($device instanceof Search)){
+            return "insert into ".$this->tableName."(\"iduser\",\"brand\",\"pricemin\",\"pricemax\","
+                    ."\"warranty\",\"waterproof\",\"screendefinition\",\"screenresolutionmin\",\"screenResolutionmax\","
+                    . "\"screensizemin\",\"screensizeMax\",\"screenpanel\",\"cpumodel\",\"cpufrequencymin\",\"cpufrequencymax\","
+                    . "\"cpucoremin\",\"cpucoremax\",\"rammin\",\"rammax\",\"cameraresolutionmin\",\"cameraresolutionmax\",\"frontcameraresolutionmin\",,\"frontcameraresolutionmax\""
+                    . "\"flash\",\"sizeheighmin\",\"sizeheighmax\",\"sizewidthmin\",\"sizewidthmax\",\"sizethicknessmin\",\"sizethicknessmax\",\"weightmin\",,\"weightmax\""
+                    . "\"batterycapacitymin\",\"batterycapacitymax\",\"storagemin\",\"storagemax\",\"externalstorage\",\"software\") values ("
+                    .$this->paramToSql($search->getUser()).","
+                    .$this->paramToSql($search->getBrand()).","
+                    .$this->paramToSql($search->getPriceMin()).","
+                    .$this->paramToSql($search->getPriceMax()).","
+                    .$this->paramToSql($search->getWarranty()).","
+                    .$this->paramToSql($search->getWaterproof()).","
+                    .$this->paramToSql($search->getScreenDefinition()).","
+                    .$this->paramToSql($search->getScreenResolutionMin()).","
+                    .$this->paramToSql($search->getScreenResolutionMax()).","
+                    .$this->paramToSql($search->getScreenSizeMin()).","
+                    .$this->paramToSql($search->getScreenSizeMax()).","
+                    .$this->paramToSql($search->getScreenPanel()).","
+                    .$this->paramToSql($search->getCPUModel()).","
+                    .$this->paramToSql($search->getCPUFrequencyMin()).","
+                    .$this->paramToSql($search->getCPUFrequencyMax()).","
+                    .$this->paramToSql($search->getCPUCoreMin()).","
+                    .$this->paramToSql($search->getCPUCoreMax()).","
+                    .$this->paramToSql($search->getRAMMin()).","
+                    .$this->paramToSql($search->getRAMMax()).","
+                    .$this->paramToSql($search->getCameraResolutionMin()).","
+                    .$this->paramToSql($search->getCameraResolutionMax()).","
+                    .$this->paramToSql($search->getFrontCameraResolutionMin()).","
+                    .$this->paramToSql($search->getFrontCameraResolutionMax()).","
+                    .$this->paramToSql($search->getFlash()).","
+                    .$this->paramToSql($search->getSizeHeighMin()).","
+                    .$this->paramToSql($search->getSizeHeighMax()).""
+                    .$this->paramToSql($search->getSizeWidthMin()).","
+                    .$this->paramToSql($search->getSizeWidthMax()).","
+                    .$this->paramToSql($search->getSizeThicknessMin()).","
+                    .$this->paramToSql($search->getSizeThicknessMax()).","
+                    .$this->paramToSql($search->getWeightMin()).","
+                    .$this->paramToSql($search->getWeightMax()).","
+                    .$this->paramToSql($search->getBatteryCapacityMin()).","
+                    .$this->paramToSql($search->getBatteryCapacityMax()).","
+                    .$this->paramToSql($search->getStorageMin()).","
+                    .$this->paramToSql($search->getStorageMax()).","
+                    .$this->paramToSql($search->getExternalStorage()).","
+                    .$this->paramToSql($search->getSoftware()).","
+                    .$this->paramToSql($search->getDateInsert()).")";
+     }
+        throw new Exception("the parameter is not an instantance of Device ", null, null);
+   }
 
 }

@@ -50,20 +50,22 @@ class SurveyFactory extends Factory{
     }
     
    
-    public function createSurvey(Survey $user){
-       return parent::create($this->tableName, $user);
+    public function createSurvey(Survey $survey){
+       return parent::create($survey);
     }
     
     protected function toObject($record) {
         return new Survey(
-          $record['id'],$record['user'],
-          $record['search'],$record['email'],
-          $record['percentage']
+          $record['id'],$record['iduser'],
+          $record['idsearch'],$record['note']
         );
     }
 
     protected function toSql($survey) {
-         return "(".$survey->getId().",".$survey->getUser().",".$survey->getSearch().",".$survey->getPercentage().")";
+         return "insert into ".$this->tableName."(\"iduser\",\"idsearch\",\"note\") values ("
+                 .$this->paramToSql($survey->getIduser()).","
+                 .$this->paramToSql($survey->getIdsearch()).","
+                 .$this->paramToSql($survey->getNote()).")";
 
     }
 }

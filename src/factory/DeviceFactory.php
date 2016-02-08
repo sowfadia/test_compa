@@ -99,7 +99,7 @@ class DeviceFactory extends Factory {
 
     protected function toSql($device) {
         if(!is_null($device) && ($device instanceof Device)){
-            return "insert into compa.device(\"idprovider\",\"brand\",\"model\",\"price\","
+            return "insert into ".$this->tableName."(\"idprovider\",\"brand\",\"model\",\"price\","
                     ."\"warranty\",\"waterproof\",\"screendefinition\",\"screenresolution\","
                     . "\"screensize\",\"screenpanel\",\"cpumodel\",\"cpufrequency\","
                     . "\"cpucore\",\"ram\",\"cameraresolution\",\"frontcameraresolution\","

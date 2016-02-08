@@ -85,7 +85,7 @@ class UserFactory extends Factory{
      */
     protected function toSql($user) {
         if(!is_null($user) && ($user instanceof User)){
-            return "insert into compa.users(\"email\",\"password\",\"firstname\",\"lastname\") values ("
+            return "insert into ".$this->tableName."(\"email\",\"password\",\"firstname\",\"lastname\") values ("
                     .$this->paramToSql($user->getEmail()).","
                     .$this->paramToSql($user->getPassword()).","
                     .$this->paramToSql($user->getFirstName()).","

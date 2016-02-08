@@ -7,7 +7,7 @@
  */
 class Search {
     private $id;
-    private $user;
+    private $iduser;
     private $brand;
     private $priceMin;
     private $priceMax;
@@ -49,7 +49,7 @@ class Search {
     
     function __construct($id, $user, $brand, $priceMin, $priceMax, $warranty, $waterproof, $screenDefinition, $screenResolutionMin, $screenResolutionMax, $screenSizeMin, $screenSizeMax, $screenPanel, $CPUModel, $CPUFrequencyMin, $CPUFrequencyMax, $CPUCoreMin, $CPUCoreMax, $RAMMin, $RAMMax, $cameraResolutionMin, $cameraResolutionMax, $frontCameraResolutionMin, $frontCameraResolutionMax, $flash, $sizeHeighMin, $sizeHeighMax, $sizeWidthMin, $sizeWidthMax, $sizeThicknessMin, $sizeThicknessMax, $weightMin, $weightMax, $batteryCapacityMin, $batteryCapacityMax, $storageMin, $storageMax, $externalStorage, $software, $dateInsert) {
         $this->id = $id;
-        $this->user = $user;
+        $this->iduser = $user;
         $this->brand = $brand;
         $this->priceMin = $priceMin;
         $this->priceMax = $priceMax;
@@ -95,7 +95,7 @@ class Search {
     }
 
     function getUser() {
-        return $this->user;
+        return $this->iduser;
     }
 
     function getBrand() {
@@ -255,7 +255,7 @@ class Search {
     }
 
     function setUser($user) {
-        $this->user = $user;
+        $this->iduser = $user;
     }
 
     function setBrand($brand) {

@@ -84,10 +84,15 @@ class ProviderFactory extends Factory{
      * @return String, a string reprenting the provider
      */
     protected function toSql($provider) {
-       return "(".$provider->getName().",".$provider->getEmail().",".$provider->getTelephone().","
-               .$provider->getContactpage().",".$provider->getAddresse().",".$provider->getContactpreference().","
-               .$provider->getDescription().",".$provider->getProfil().",".$provider->getUrlProducts().","
-               .$provider->getPassword().")";
+       return "insert into ".$this->tableName." values (".$this->paramToSql($provider->getName()).","
+               .$this->paramToSql($provider->getEmail()).",".$this->paramToSql($provider->getTelephone()).","
+               .$this->paramToSql($provider->getContactpage()).","
+               .$this->paramToSql($provider->getAddresse()).","
+               .$this->paramToSql($provider->getContactpreference()).","
+               .$this->paramToSql($provider->getDescription()).","
+               .$this->paramToSql($provider->getProfil()).","
+               .$this->paramToSql($provider->getUrlProducts()).","
+               .$this->paramToSql($provider->getPassword()).")";
     }
 
     /**

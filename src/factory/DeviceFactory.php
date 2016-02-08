@@ -96,6 +96,16 @@ class DeviceFactory extends Factory {
                 $record['externalstorage'], $record['software'], $record['image']
         );
     }
+    
+    private function paramToSql($param){
+      if(is_null($param)){
+         return "NULL"; 
+      }
+      if(is_bool($param) || is_numeric($param)){
+        return $param;  
+      }
+      return "'".$param."'";
+    }
 
     protected function toSql($device) {
         if(!is_null($device) && ($device instanceof Device)){
@@ -105,17 +115,25 @@ class DeviceFactory extends Factory {
                     . "\"cpucore\",\"ram\",\"cameraresolution\",\"frontcameraresolution\","
                     . "\"flash\",\"sizeheigh\",\"sizewidth\",\"sizethickness\",\"weight\","
                     . "\"batterycapacity\",\"storage\",\"externalstorage\",\"software\", \"image\") values ("
-                    . $device->getProvider() . ",'" . $device->getBrand() . "','"
-                    . $device->getModel() . "'," . $device->getPrice() . ",'" . $device->getWarranty() . "','"
-                    . $device->getWaterproof() . "','" . $device->getScreenDefinition() . "'," . $device->getScreenResolution() . ","
-                    . $device->getScreenSize() . ",'" . $device->getScreenPanel() . "','" . $device->getCPUModel() . "',"
-                    . $device->getCPUFrequency() . "," . $device->getCPUCore() . "," . $device->getRAM() . ","
-                    . $device->getCameraResolution() . "," . $device->getFrontCameraResolution() . "," . $device->getFlash() . ","
-                    . $device->getSizeHeigh() . "," . $device->getSizeWidth() . "," . $device->getSizeThickness() . ","
-                    . $device->getWeight() . "," . $device->getBatteryCapacity() . "," . $device->getStorage() . ","
-                    . $device->getExternalStorage() . ",'" . $device->getSoftware() . "','" .$device->getImage()."' )";
+                    . $this->paramToSql($device->getProvider()) . "," . $this->paramToSql($device->getBrand()) . ","
+                    . $this->paramToSql($device->getModel()) . "," . $this->paramToSql($device->getPrice()) . "," 
+                    . $this->paramToSql($device->getWarranty()) . ","
+                    . $this->paramToSql($device->getWaterproof()) . "," . $this->paramToSql($device->getScreenDefinition()) . "," 
+                    . $this->paramToSql($device->getScreenResolution()) . ","
+                    . $this->paramToSql($device->getScreenSize()) . "," . $this->paramToSql($device->getScreenPanel()) . "," 
+                    . $this->paramToSql($device->getCPUModel()) . ","
+                    . $this->paramToSql($device->getCPUFrequency()) . "," . $this->paramToSql($device->getCPUCore()) . "," 
+                    . $this->paramToSql($device->getRAM()) . ","
+                    . $this->paramToSql($device->getCameraResolution()) . "," 
+                    . $this->paramToSql($device->getFrontCameraResolution()) . "," . $this->paramToSql($device->getFlash()) . ","
+                    . $this->paramToSql($device->getSizeHeigh()) . "," . $this->paramToSql($device->getSizeWidth()) . "," 
+                    . $this->paramToSql($device->getSizeThickness()) . ","
+                    . $this->paramToSql($device->getWeight()) . "," . $this->paramToSql($device->getBatteryCapacity()) . ","
+                    . $this->paramToSql($device->getStorage()) . ","
+                    . $this->paramToSql($device->getExternalStorage()) . "," 
+                    . $this->paramToSql($device->getSoftware()) . "," .$this->paramToSql($device->getImage()).")";
         }
-        throw new Exception("the parameter is not an instantance of Device + ".$device, null, null);
+        throw new Exception("the parameter is not an instantance of Device ", null, null);
    }
 
     /**

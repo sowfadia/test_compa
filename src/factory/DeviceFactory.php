@@ -177,10 +177,12 @@ class DeviceFactory extends Factory {
                 " and COALESCE(software, '') like '" . $software . "'";
 
         if (array_key_exists('flash', $criterias) and is_bool($criterias['flash'])) {
-            $criteria .= " and flash = " . $criterias['flash'];
+            $flash = ($criterias['flash']) ? 'true' : 'false';
+            $criteria .= " and flash = " . $flash;
         }
         if (array_key_exists('externalStorage', $criterias) and is_bool($criterias['externalStorage'])) {
-            $criteria .= " and externalStorage = " . $externalStorage;
+            $storage = $flash = ($criterias['externalStorage']) ? 'true' : 'false';
+            $criteria .= " and externalStorage = " . $storage;
         }
       
       if(!is_null($priorities)){

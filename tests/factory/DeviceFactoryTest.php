@@ -64,6 +64,36 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
         DeviceFactory::getInstance()->findByCriteriaImpl(array(),null);
     } 
     
+     /**
+     * @test
+     */
+    public function shouldExecuteCriteriaQuery(){
+        DeviceFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
+        //rajouter l'insertion d'un mobile avec Samsung commme brand et flash = true et external storage = true
+        $criteria = array();
+        $criteria['brand'] = "Samsung";
+        $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,null);
+        $this->assertNotNull($return);
+        $this->assertTrue(count($return) > 0);
+        $tabPriorities=array();
+        $tabPriorities[0]['priority'] = "price";
+        $tabPriorities[0]['order'] = "ASC";
+        $return = NULL;
+        $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,$tabPriorities);
+        $this->assertNotNull($return);
+        $this->assertTrue(count($return) > 0);
+        $criteria['flash'] = true;
+        $return = NULL;
+        $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,$tabPriorities);
+        $this->assertNotNull($return);
+        $this->assertTrue(count($return) > 0);
+        $criteria['externalStorage'] = "true";
+        $return = NULL;
+        $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,$tabPriorities);
+        $this->assertNotNull($return);
+        $this->assertTrue(count($return) > 0);
+    } 
+    
        /**
      * @test
      */
@@ -96,36 +126,5 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
 //        $this->assertNotNull($deleteReturn);
 //        $this->assertEquals(1,$deleteReturn);  
     }
-    
-     
-    /**
-     * @test
-     */
-    public function shouldExecuteCriteriaQuery(){
-        DeviceFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
-        //rajouter l'insertion d'un mobile avec Samsung commme brand et flash = true et external storage = true
-        $criteria = array();
-        $criteria['brand'] = "Samsung";
-        $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,null);
-        $this->assertNotNull($return);
-        $this->assertTrue(count($return) > 0);
-        $tabPriorities=array();
-        $tabPriorities[0]['priority'] = "price";
-        $tabPriorities[0]['order'] = "ASC";
-        $return = NULL;
-        $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,$tabPriorities);
-        $this->assertNotNull($return);
-        $this->assertTrue(count($return) > 0);
-        $criteria['flash'] = true;
-        $return = NULL;
-        $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,$tabPriorities);
-        $this->assertNotNull($return);
-        $this->assertTrue(count($return) > 0);
-        $criteria['externalStorage'] = "true";
-        $return = NULL;
-        $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,$tabPriorities);
-        $this->assertNotNull($return);
-        $this->assertTrue(count($return) > 0);
-    } 
     
 }

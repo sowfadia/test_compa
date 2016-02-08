@@ -83,7 +83,7 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
 //       $this->assertNotNull($deleteReturn);
 //       $this->assertTrue($deleteReturn == 1);
         
-        $device = new Device(-1,1, "Samsung", "S6", 800, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        $device = new Device(-1,1, "Samsung", "S6", 800, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
         DeviceFactory::getInstance()->setConnection(self::$con);
         $this->assertTrue(DeviceFactory::getInstance()->isConnectionSet());
         $nbrow = DeviceFactory::getInstance()->createDevice($device);

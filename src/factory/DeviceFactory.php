@@ -68,7 +68,7 @@ class DeviceFactory extends Factory {
     }
 
     public function deleteDevice($id) {
-        return parent::delete($this->tableName, $id)
+        return parent::delete($this->tableName, $id);
     }
 
     public function updateDevice($id,$fields) {

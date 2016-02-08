@@ -7,15 +7,9 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require './utils/Connection.php'; 
- 
-$server = "zdro.fr";
-$port = '5432';
-$user = "postgres";
-$password = "CaucWumIc3";
-$dataBase = "postgres";
-$dbType = "pgsql";
+require_once(__DIR__.'/config/config.php'); 
 
-$connection = new Connection($server, $port, $user, $password, $dataBase,$dbType);
+$connection = new Connection(DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE,DB_TYPE);
 
 // redirection page
 $authorizedPages = array('search', 'test');

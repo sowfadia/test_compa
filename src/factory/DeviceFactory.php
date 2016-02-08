@@ -75,27 +75,48 @@ class DeviceFactory extends Factory {
         return parent::update($this->tableName, $id, $fields);
     }
 
-    public function createDevice($user) {
-        return parent::create($this->tableName, $user);
+    public function createDevice($device) {
+        return parent::create($this->tableName, $device);
     }
 
     protected function toObject($record) {
         return new Device(
-                $record['id'], $record['idprovider'], $record['brand'], $record['model'], $record['price'], $record['warranty'], $record['waterproof'], $record['screendefinition'], $record['screenresolution'], $record['screensize'], $record['screenpanel'], $record['cpumodel'], $record['cpufrequency'], $record['cpucore'], $record['ram'], $record['cameraresolution'], $record['frontcameraresolution'], $record['flash'], $record['sizeheigh'], $record['sizewidth'], $record['sizethickness'], $record['weight'], $record['batterycapacity'], $record['storage'], $record['externalstorage'], $record['software']
+                $record['id'], $record['idprovider'],
+                $record['brand'], $record['model'], 
+                $record['price'], $record['warranty'],
+                $record['waterproof'], $record['screendefinition'], 
+                $record['screenresolution'], $record['screensize'],
+                $record['screenpanel'], $record['cpumodel'], 
+                $record['cpufrequency'], $record['cpucore'], 
+                $record['ram'], $record['cameraresolution'], 
+                $record['frontcameraresolution'], $record['flash'],
+                $record['sizeheigh'], $record['sizewidth'], 
+                $record['sizethickness'], $record['weight'],
+                $record['batterycapacity'], $record['storage'], 
+                $record['externalstorage'], $record['software'], $record['image']
         );
     }
 
     protected function toSql($device) {
-        return "(" . $device->getId() . "," . $device->getName() . "," . $device->getProvider() . "," . $device->getBrand() . ","
-                . $device->getModel() . "," . $device->getPrice() . "," . $device->getWarranty() . ","
-                . $device->getWaterproof() . "," . $device->getScreenDefinition() . "," . $device->getScreenResolution() . ","
-                . $device->getScreenSize() . "," . $device->getScreenPanel() . "," . $device->getCPUModel() . ","
-                . $device->getCPUFrequency() . "," . $device->getCPUCore() . "," . $device->getRAM() . ","
-                . $device->getCameraResolution() . "," . $device->getFrontCameraResolution() . "," . $device->getFlash() . ","
-                . $device->getSizeHeigh() . "," . $device->getSizeWidth() . "," . $device->getSizeThickness() . ","
-                . $device->getWeight() . "," . $device->getBatteryCapacity() . "," . $device->getStorage() . ","
-                . $device->getExternalStorage() . "," . $device->getSoftware() . ")";
-    }
+        if(!is_null($device) && ($device instanceof Device)){
+            return "insert into compa.device(\"idprovider\",\"brand\",\"model\",\"price\","
+                    ."\"warranty\",\"waterproof\",\"screendefinition\",\"screenresolution\","
+                    . "\"screensize\",\"screenpanel\",\"cpumodel\",\"cpufrequency\","
+                    . "\"cpucore\",\"ram\",\"cameraresolution\",\"frontcameraresolution\","
+                    . "\"flash\",\"sizeheigh\",\"sizewidth\",\"sizethickness\",\"weight\","
+                    . "\"batterycapacity\",\"storage\",\"externalstorage\",\"software\", \"image\") values ("
+                    . $device->getProvider() . ",'" . $device->getBrand() . "','"
+                    . $device->getModel() . "'," . $device->getPrice() . ",'" . $device->getWarranty() . "','"
+                    . $device->getWaterproof() . "','" . $device->getScreenDefinition() . "'," . $device->getScreenResolution() . ","
+                    . $device->getScreenSize() . ",'" . $device->getScreenPanel() . "','" . $device->getCPUModel() . "',"
+                    . $device->getCPUFrequency() . "," . $device->getCPUCore() . "," . $device->getRAM() . ","
+                    . $device->getCameraResolution() . "," . $device->getFrontCameraResolution() . "," . $device->getFlash() . ","
+                    . $device->getSizeHeigh() . "," . $device->getSizeWidth() . "," . $device->getSizeThickness() . ","
+                    . $device->getWeight() . "," . $device->getBatteryCapacity() . "," . $device->getStorage() . ","
+                    . $device->getExternalStorage() . ",'" . $device->getSoftware() . "','" .$device->getImage()."' )";
+        }
+        throw new Exception("the parameter is not an instantance of Device", null, null);
+   }
 
     /**
      * A function to filter and return matching devices using given criteria

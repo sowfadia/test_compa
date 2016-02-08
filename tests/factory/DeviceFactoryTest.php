@@ -29,7 +29,9 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
         DeviceFactory::getInstance()->setConnection(self::$con);
         $this->assertTrue(DeviceFactory::getInstance()->isConnectionSet());
         $devices = DeviceFactory::getInstance()->getDevices();
+        //Rajouter insert 
         $this->assertNotNull($devices);
+        //Rajouter delete
     } 
     
      /**
@@ -47,8 +49,10 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
      */
     public function shouldFindDEvice(){
         DeviceFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
+        //Add insert 
         $return=DeviceFactory::getInstance()->findDeviceById(1);
         $this->assertNotNull($return);
+        //$this->assertEquals ($return->getBrand(), created brand);
     }    
     
     /**
@@ -59,6 +63,32 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
         DeviceFactory::getInstance()->unsetConnection();//to unset the connection already set before
         DeviceFactory::getInstance()->findByCriteriaImpl(array(),null);
     } 
+    
+       /**
+     * @test
+     */
+    public function shouldExecuteDeviceCRUD(){
+        
+//       $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);
+//       $con->connect();
+//       $createReturn=$con->executeCreate("insert into compa.users(\"email\",\"password\",\"firstname\",\"lastname\") values ('sow@sow.fr', 'sow', 'Fatou', 'SOW')");
+//       $this->assertNotNull($createReturn);
+//       $QueryReturn=$con->executeQuery("select * from compa.users where email like 'sow@sow.fr'");
+//       $this->assertNotNull($QueryReturn);
+//       $this->assertTrue(count($QueryReturn) > 0);
+//       $updateReturn=$con->executeUpdate("update compa.users set firstname = 'Fatoumata' where id=".$QueryReturn[0]["id"]);
+//       $this->assertNotNull($updateReturn);
+//       $this->assertTrue($updateReturn == 1);
+//       $deleteReturn=$con->executeDelete("delete from compa.users where id=".$QueryReturn[0]["id"]);
+//       $this->assertNotNull($deleteReturn);
+//       $this->assertTrue($deleteReturn == 1);
+        
+        $device = new Device(-1,1, "Samsung", "S6", 800, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        DeviceFactory::getInstance()->setConnection(self::$con);
+        $this->assertTrue(DeviceFactory::getInstance()->isConnectionSet());
+        $nbrow = DeviceFactory::getInstance()->createDevice($device);
+        $this->assertEquals(1,$nbrow);  
+    }
     
      
     /**
@@ -83,7 +113,7 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
         $return = NULL;
         $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,$tabPriorities);
         $this->assertNotNull($return);
-        $this->assertEquals(count($return), 1);
+        $this->assertTrue(count($return) > 0);
         $criteria['externalStorage'] = "true";
         $return = NULL;
         $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,$tabPriorities);

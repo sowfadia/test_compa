@@ -83,11 +83,18 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
 //       $this->assertNotNull($deleteReturn);
 //       $this->assertTrue($deleteReturn == 1);
         
-        $device = new Device(-1,1, "Samsung", "S6", 800, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+        $device = new Device(-1,1, "MyTestBrandName", "S6", 800, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
         DeviceFactory::getInstance()->setConnection(self::$con);
         $this->assertTrue(DeviceFactory::getInstance()->isConnectionSet());
-        $nbrow = DeviceFactory::getInstance()->createDevice($device);
-        $this->assertEquals(1,$nbrow);  
+        $createReturn = DeviceFactory::getInstance()->createDevice($device);
+        $this->assertNotNull($createReturn);
+        $this->assertEquals(1,$createReturn);  
+        $criteria = array();
+        $criteria['brand'] = "MyTestBrandName";
+        $devices = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,null);
+        $deleteReturn = DeviceFactory::getInstance()->deleteDevice($devices[0]->getId());
+        $this->assertNotNull($deleteReturn);
+        $this->assertEquals(1,$deleteReturn);  
     }
     
      

@@ -91,7 +91,7 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
         $return = NULL;
         $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,$tabPriorities);
         $this->assertNotNull($return);
-        $this->assertTrue(count($return) > 0);
+        $this->assertTrue(count($return) > 0)
     } 
     
        /**

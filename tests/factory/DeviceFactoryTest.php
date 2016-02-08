@@ -72,7 +72,7 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
         //rajouter l'insertion d'un mobile avec Samsung commme brand et flash = true et external storage = true
         $criteria = array();
         $criteria['brand'] = "Samsung";
-        $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,null);
+        $return = DeviceFactory::getInstance()->findByCrite($criteria,null);
         $this->assertNotNull($return);
         $this->assertTrue(count($return) > 0);
         $tabPriorities=array();
@@ -91,7 +91,7 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
         $return = NULL;
         $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,$tabPriorities);
         $this->assertNotNull($return);
-        $this->assertTrue(count($return) > 0)
+        $this->assertTrue(count($return) > 0);
     } 
     
        /**

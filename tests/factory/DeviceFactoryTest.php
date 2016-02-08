@@ -66,7 +66,7 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
      */
     public function shouldExecuteCriteriaQuery(){
         DeviceFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
-        //rajouter l'insertion d'un mobile avec Samsung commme brand
+        //rajouter l'insertion d'un mobile avec Samsung commme brand et flash = true et external storage = true
         $criteria = array();
         $criteria['brand'] = "Samsung";
         $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,null);
@@ -83,8 +83,12 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
         $return = NULL;
         $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,$tabPriorities);
         $this->assertNotNull($return);
-        $this->assertTrue(count($return) > 0);
+        $this->assertEquals(count($return), 1);
         $criteria['externalStorage'] = "true";
+        $return = NULL;
+        $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,$tabPriorities);
+        $this->assertNotNull($return);
+        $this->assertTrue(count($return) > 0);
     } 
     
 }

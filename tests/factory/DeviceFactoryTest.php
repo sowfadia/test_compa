@@ -122,9 +122,9 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
         $criteria = array();
         $criteria['brand'] = "MyTestBrandName";
         $devices = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,null);
-//        $deleteReturn = DeviceFactory::getInstance()->deleteDevice($devices[0]->getId());
-//        $this->assertNotNull($deleteReturn);
-//        $this->assertEquals(1,$deleteReturn);  
+        $deleteReturn = DeviceFactory::getInstance()->deleteDevice($devices[0]->getId());
+        $this->assertNotNull($deleteReturn);
+        $this->assertEquals(1,$deleteReturn);  
     }
     
 }

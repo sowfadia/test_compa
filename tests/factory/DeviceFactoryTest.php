@@ -66,9 +66,12 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
      */
     public function shouldExecuteCriteriaQuery(){
         DeviceFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
+        //rajouter l'insertion d'un mobile avec Samsung commme brand
         $criteria = array();
         $criteria['brand'] = "Samsung";
-        DeviceFactory::getInstance()->findByCriteriaImpl($criteria,null);
+        $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,null);
+        $this->assertNotNull($return);
+        $this->assertTrue(count($return) > 0);
     } 
     
 }

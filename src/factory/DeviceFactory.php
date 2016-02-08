@@ -115,7 +115,7 @@ class DeviceFactory extends Factory {
                     . $device->getWeight() . "," . $device->getBatteryCapacity() . "," . $device->getStorage() . ","
                     . $device->getExternalStorage() . ",'" . $device->getSoftware() . "','" .$device->getImage()."' )";
         }
-        throw new Exception("the parameter is not an instantance of Device", null, null);
+        throw new Exception("the parameter is not an instantance of Device + ".$device, null, null);
    }
 
     /**

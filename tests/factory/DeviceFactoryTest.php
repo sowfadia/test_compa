@@ -118,7 +118,7 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
         $this->assertTrue(DeviceFactory::getInstance()->isConnectionSet());
         $createReturn = DeviceFactory::getInstance()->createDevice($device);
         $this->assertNotNull($createReturn);
-        $this->assertEquals(3,$createReturn);  
+        $this->assertEquals(1,$createReturn);  
         $criteria = array();
         $criteria['brand'] = "MyTestBrandName";
         $devices = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,null);

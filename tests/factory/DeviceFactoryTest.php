@@ -79,12 +79,12 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
         $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,$tabPriorities);
         $this->assertNotNull($return);
         $this->assertTrue(count($return) > 0);
-        $criteria['flash'] = true;
+        $criteria['flash'] = "true";
         $return = NULL;
         $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,$tabPriorities);
         $this->assertNotNull($return);
         $this->assertTrue(count($return) > 0);
-        $criteria['externalStorage'] = true;
+        $criteria['externalStorage'] = "true";
     } 
     
 }

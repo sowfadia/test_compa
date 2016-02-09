@@ -80,5 +80,4 @@ class ProviderFactoryTest extends PHPUnit_Framework_TestCase {
         $this->assertNotNull($deleteReturn);
         $this->assertEquals(1,$deleteReturn);  
     } 
-    
 }

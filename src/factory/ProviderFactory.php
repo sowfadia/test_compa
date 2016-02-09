@@ -85,8 +85,12 @@ class ProviderFactory extends Factory{
      */
     protected function toSql($provider) {
         if(!is_null($provider) && ($provider instanceof Provider)){
-            return "insert into ".$this->tableName." values (".$this->paramToSql($provider->getName()).","
-                    .$this->paramToSql($provider->getEmail()).",".$this->paramToSql($provider->getTelephone()).","
+            return "insert into ".$this->tableName."(\"name\",\"email\",\"telephone\",\"contactpage\","
+                    ."\"address\",\"password\",\"contactpreference\",\"profil\","
+                    . "\"description\",\"urlproducts) values ("
+                    .$this->paramToSql($provider->getName()).","
+                    .$this->paramToSql($provider->getEmail()).","
+                    .$this->paramToSql($provider->getTelephone()).","
                     .$this->paramToSql($provider->getContactpage()).","
                     .$this->paramToSql($provider->getAddress()).","
                     .$this->paramToSql($provider->getContactpreference()).","

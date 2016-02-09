@@ -56,7 +56,7 @@ class SearchFactory extends Factory{
     }
     
     public function createSearch(Search $search){
-        return parent::create($object);
+        return parent::create($search);
     }
 
     protected function toObject($record) {

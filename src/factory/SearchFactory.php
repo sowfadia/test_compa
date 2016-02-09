@@ -113,7 +113,7 @@ class SearchFactory extends Factory{
                     .$this->paramToSql($search->getFrontCameraResolutionMax()).","
                     .$this->paramToSql($search->getFlash()).","
                     .$this->paramToSql($search->getSizeHeighMin()).","
-                    .$this->paramToSql($search->getSizeHeighMax()).""
+                    .$this->paramToSql($search->getSizeHeighMax()).","
                     .$this->paramToSql($search->getSizeWidthMin()).","
                     .$this->paramToSql($search->getSizeWidthMax()).","
                     .$this->paramToSql($search->getSizeThicknessMin()).","

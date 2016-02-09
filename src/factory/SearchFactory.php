@@ -125,8 +125,7 @@ class SearchFactory extends Factory{
                     .$this->paramToSql($search->getStorageMin()).","
                     .$this->paramToSql($search->getStorageMax()).","
                     .$this->paramToSql($search->getExternalStorage()).","
-                    .$this->paramToSql($search->getSoftware()).","
-                    .$this->paramToSql($search->getDateInsert()).")";
+                    .$this->paramToSql($search->getSoftware()).")";
      }
         throw new Exception("the parameter is not an instantance of Device ", null, null);
    }

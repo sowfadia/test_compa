@@ -20,6 +20,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
      * @expectedException ConnectionNotSetException
      */
     public function shouldNotCreateUser(){
+       UserFactory::getInstance()->unsetConnection();
        $user=new User(-1,"fds", "fds", "fds", "fds", new DateTime());
        $nbrow = UserFactory::getInstance()->createUser($user);
     }

@@ -87,7 +87,7 @@ class ProviderFactory extends Factory{
         if(!is_null($provider) && ($provider instanceof Provider)){
             return "insert into ".$this->tableName."(\"name\",\"email\",\"telephone\",\"contactpage\","
                     ."\"address\",\"password\",\"contactpreference\",\"profil\","
-                    . "\"description\",\"urlproducts) values ("
+                    . "\"description\",\"urlproducts\") values ("
                     .$this->paramToSql($provider->getName()).","
                     .$this->paramToSql($provider->getEmail()).","
                     .$this->paramToSql($provider->getTelephone()).","

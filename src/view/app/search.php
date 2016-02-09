@@ -206,7 +206,6 @@
         <?php 
           if ($resultResearchDevices != NULL){
             foreach ($resultResearchDevices as $device) {
-              // print_r($device);
               echo generateHTMLDevice($device);
             }
            }

@@ -88,7 +88,7 @@ class ProviderFactory extends Factory{
             return "insert into ".$this->tableName." values (".$this->paramToSql($provider->getName()).","
                     .$this->paramToSql($provider->getEmail()).",".$this->paramToSql($provider->getTelephone()).","
                     .$this->paramToSql($provider->getContactpage()).","
-                    .$this->paramToSql($provider->getAddresse()).","
+                    .$this->paramToSql($provider->getAddress()).","
                     .$this->paramToSql($provider->getContactpreference()).","
                     .$this->paramToSql($provider->getDescription()).","
                     .$this->paramToSql($provider->getProfil()).","

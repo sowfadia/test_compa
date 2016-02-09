@@ -84,7 +84,7 @@ class ProviderFactory extends Factory{
      * @return String, a string reprenting the provider
      */
     protected function toSql($provider) {
-        if(!is_null($device) && ($device instanceof Provider)){
+        if(!is_null($provider) && ($device instanceof Provider)){
             return "insert into ".$this->tableName." values (".$this->paramToSql($provider->getName()).","
                     .$this->paramToSql($provider->getEmail()).",".$this->paramToSql($provider->getTelephone()).","
                     .$this->paramToSql($provider->getContactpage()).","

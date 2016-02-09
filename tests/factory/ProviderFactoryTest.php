@@ -69,6 +69,7 @@ class ProviderFactoryTest extends PHPUnit_Framework_TestCase {
         $criteria = array();
         $criteria['email'] = "provider@provider.fr";
         $providers = ProviderFactory::getInstance()->findByCriteriaImpl($criteria);
+        $this->assertEquals("ProviderTestName",$providers[0]->getName());
         $fields['name'] = "ProviderTestName2";
         $updateReturn = ProviderFactory::getInstance()->updateProvider($providers[0]->getId(),$fields);
         $this->assertNotNull($updateReturn);

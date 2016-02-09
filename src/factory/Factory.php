@@ -115,10 +115,12 @@ abstract class Factory {
       if($this->isConnectionSet()){
           $objects = array();  
             $sql="select * from ".$tableName." where ".$criteria;
-            $record=$this->connection->executeQuery($sql);
-            if($record){
-                foreach ($record as $object){
-                    $objects[] = $this->toObject($object);
+            if(!is_null($criteria) && ! $criteria == ""){
+                $record=$this->connection->executeQuery($sql);
+                if($record){
+                    foreach ($record as $object){
+                        $objects[] = $this->toObject($object);
+                    }
                 }
             }
             return $objects;

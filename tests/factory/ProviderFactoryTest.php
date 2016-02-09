@@ -52,7 +52,7 @@ class ProviderFactoryTest extends PHPUnit_Framework_TestCase {
      */
     public function shouldFindProvider(){
         ProviderFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
-        $return=ProviderFactory::getInstance()->findProviderById(1);
+        $return=ProviderFactory::getInstance()->findProviderById(50);
         $this->assertNotNull($return);
     } 
     
@@ -60,9 +60,24 @@ class ProviderFactoryTest extends PHPUnit_Framework_TestCase {
      * @test
      */
     public function shouldExecuteProviderCRUD(){
-        ProviderFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
-        $return=ProviderFactory::getInstance()->findProviderById(1);
-        $this->assertNotNull($return);
+        $provider = new Provider(-1,"ProviderTestName", "provider@provider.fr", "00000000", "http://mypage.fr", "1 Provider Road 59 ProviderLand", "test", 1, NULL, NULL, "http://mypage.fr/myproducts");
+        ProviderFactory::getInstance()->setConnection(self::$con);
+        $this->assertTrue(ProviderFactory::getInstance()->isConnectionSet());
+        $createReturn = ProviderFactory::getInstance()->createProvider($provider);
+        $this->assertNotNull($createReturn);
+        $this->assertEquals(1,$createReturn);  
+        $criteria = array();
+        $criteria['email'] = "provider@provider.fr";
+        $providers = ProviderFactory::getInstance()->findByCriteriaImpl($criteria);
+        $fields['name'] = "ProviderTestName2";
+        $updateReturn = ProviderFactory::getInstance()->updateProvider($providers[0]->getId(),$fields);
+        $this->assertNotNull($updateReturn);
+        $this->assertEquals(1,$updateReturn);
+        $providers = ProviderFactory::getInstance()->findByCriteriaImpl($fields);
+        $this->assertEquals("ProviderTestName2",$providers[0]->getName());
+//        $deleteReturn = ProviderFactory::getInstance()->deleteProvider($providers[0]->getId());
+//        $this->assertNotNull($deleteReturn);
+//        $this->assertEquals(1,$deleteReturn);  
     } 
     
 }

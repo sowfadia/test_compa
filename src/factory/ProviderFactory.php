@@ -110,4 +110,17 @@ class ProviderFactory extends Factory{
           $record['urlproducts']
         );
     }
+    
+    public function findByCriteriaImpl($criterias){
+        $criteriaString="";
+        $nbfields = count($criterias);
+        foreach ($criterias as $key => $value) {
+          $criteriaString .= $key." = ".$this->paramToSql($value)."";
+          $nbfields --;
+          if($nbfields > 0) {
+              $criteriaString .= " and "; 
+          }
+        }
+        return parent::findByCriteria($this->tableName, $criteriaString);
+    }
 }

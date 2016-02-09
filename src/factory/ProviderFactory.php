@@ -75,7 +75,7 @@ class ProviderFactory extends Factory{
      * @param type $provider the new provider
      */
     public function createProvider($provider){
-        return parent::create($this->tableName, $provider);
+        return parent::create($provider);
     }
     
     /**

@@ -65,7 +65,7 @@ class SearchFactory extends Factory{
           $record['brand'],$record['pricemin'],
           $record['pricemax'], $record['warranty'],
           $record['waterproof'], $record['screendefinition'],
-          $record['screenResolutionmin'],$record['screenResolutionmax'],
+          $record['screenresolutionmin'],$record['screenResolutionmax'],
           $record['screensizemin'],$record['screensizemax'],$record['screenpanel'],
           $record['cpumodel'], $record['cpufrequencymin'], $record['cpufrequencymax'],
           $record['cpucoremin'],$record['cpucoremax'],$record['rammin'],$record['rammax'],
@@ -74,7 +74,7 @@ class SearchFactory extends Factory{
           $record['flash'],$record['sizeheighmin'],$record['sizeheighmax'],
           $record['sizewidthmin'], $record['sizewidthmax'], $record['sizethicknessmin'], 
           $record['sizethicknessmax'],$record['weightmin'],$record['weightmax'],
-          $record['batteryCapacitymin'],$record['batteryCapacitymax'],
+          $record['batterycapacitymin'],$record['batterycapacitymax'],
           $record['storagemin'], $record['storagemax'],$record['externalstorage'],
           $record['software'],$record['dateinsert']
         );

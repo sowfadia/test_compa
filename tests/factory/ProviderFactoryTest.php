@@ -74,7 +74,7 @@ class ProviderFactoryTest extends PHPUnit_Framework_TestCase {
         $updateReturn = ProviderFactory::getInstance()->updateProvider($providers[0]->getId(),$fields);
         $this->assertNotNull($updateReturn);
         $this->assertEquals(1,$updateReturn);
-        $providers = ProviderFactory::getInstance()->findByCriteriaImpl($fields);
+        $providers = ProviderFactory::getInstance()->findProviderById($providers[0]->getId());
         $this->assertEquals("ProviderTestName2",$providers[0]->getName());
         $deleteReturn = ProviderFactory::getInstance()->deleteProvider($providers[0]->getId());
         $this->assertNotNull($deleteReturn);

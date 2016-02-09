@@ -48,7 +48,7 @@ class ProviderFactory extends Factory{
      * @return Provider, the corresponding provider; null if the connection is not set yet or the provider does not exst
      */
     public function findProviderById($id) {
-        return parent::findById($this->tableName, $id);
+        return parent::findById($this->tableName, $id)
     }
     
     /**

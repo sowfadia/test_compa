@@ -81,13 +81,12 @@ class SearchFactoryTest extends PHPUnit_Framework_TestCase {
         $updateReturn = SearchFactory::getInstance()->updateSearch($searches[0]->getId(),$fields);
         $this->assertNotNull($updateReturn);
         $this->assertEquals(1,$updateReturn);
-//        $searches = SearchFactory::getInstance()->findProviderById($searches[0]->getId());
-//        $this->assertEquals("ProviderTestName2",$providers[0]->getName());
-//        $deleteReturn = SearchFactory::getInstance()->deleteSearch($searches[0]->getId());
-//        $this->assertNotNull($deleteReturn);
-//        $this->assertEquals(1,$deleteReturn);  
-//        
-//        $nbrow = UserFactory::getInstance()->deleteUser($USER_FROM_DB[0]->getId());
+        $searches = SearchFactory::getInstance()->findProviderById($searches[0]->getId());
+        $this->assertEquals("Samsung",$searches[0]->getBrand());
+        $deleteReturn = SearchFactory::getInstance()->deleteSearch($searches[0]->getId());
+        $this->assertNotNull($deleteReturn);
+        $this->assertEquals(1,$deleteReturn);  
+        $nbrow = UserFactory::getInstance()->deleteUser($USER_FROM_DB[0]->getId());
     } 
     
 }

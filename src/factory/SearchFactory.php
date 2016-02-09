@@ -83,10 +83,10 @@ class SearchFactory extends Factory{
     protected function toSql($search) {
         if(!is_null($search) && ($search instanceof Search)){
             return "insert into ".$this->tableName."(\"iduser\",\"brand\",\"pricemin\",\"pricemax\","
-                    ."\"warranty\",\"waterproof\",\"screendefinition\",\"screenresolutionmin\",\"screenResolutionmax\","
-                    . "\"screensizemin\",\"screensizeMax\",\"screenpanel\",\"cpumodel\",\"cpufrequencymin\",\"cpufrequencymax\","
-                    . "\"cpucoremin\",\"cpucoremax\",\"rammin\",\"rammax\",\"cameraresolutionmin\",\"cameraresolutionmax\",\"frontcameraresolutionmin\",,\"frontcameraresolutionmax\""
-                    . "\"flash\",\"sizeheighmin\",\"sizeheighmax\",\"sizewidthmin\",\"sizewidthmax\",\"sizethicknessmin\",\"sizethicknessmax\",\"weightmin\",,\"weightmax\""
+                    ."\"warranty\",\"waterproof\",\"screendefinition\",\"screenresolutionmin\",\"screenresolutionmax\","
+                    . "\"screensizemin\",\"screensizemax\",\"screenpanel\",\"cpumodel\",\"cpufrequencymin\",\"cpufrequencymax\","
+                    . "\"cpucoremin\",\"cpucoremax\",\"rammin\",\"rammax\",\"cameraresolutionmin\",\"cameraresolutionmax\",\"frontcameraresolutionmin\",\"frontcameraresolutionmax\","
+                    . "\"flash\",\"sizeheighmin\",\"sizeheighmax\",\"sizewidthmin\",\"sizewidthmax\",\"sizethicknessmin\",\"sizethicknessmax\",\"weightmin\",\"weightmax\","
                     . "\"batterycapacitymin\",\"batterycapacitymax\",\"storagemin\",\"storagemax\",\"externalstorage\",\"software\") values ("
                     .$this->paramToSql($search->getUser()).","
                     .$this->paramToSql($search->getBrand()).","

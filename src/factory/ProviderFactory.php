@@ -28,10 +28,10 @@ class ProviderFactory extends Factory{
      * @return ProviderFactory, the Factory's singleton
      */
     public static function getInstance(){
-        if(is_null(self::$instance)) {
-            self::$instance = new ProviderFactory();  
+        if(is_null(static::$instance)) {
+            static::$instance = new ProviderFactory();  
         }
-        return self::$instance;
+        return static::$instance;
     }
     
     /**

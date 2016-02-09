@@ -21,10 +21,10 @@ class DeviceFactory extends Factory {
     public function __construct() {}
 
     public static function getInstance() {
-        if (is_null(self::$instance)) {
-            self::$instance = new DeviceFactory();
+        if (is_null(static::$instance)) {
+            static::$instance = new DeviceFactory();
         }
-        return self::$instance;
+        return static::$instance;
     }
 
     public function getDevices() {
@@ -130,9 +130,6 @@ class DeviceFactory extends Factory {
      * A function to filter and return matching devices using given criteria
      */
     public function findByCriteriaImpl($criterias, $priorities) {
-      
-        //$priceMin = (array_key_exists('priceMin', $criterias) ? $criterias['priceMin'] : 0);  
-      
         $brand = (array_key_exists('brand', $criterias) ? $criterias['brand'] : '%');
         $warranty = (!array_key_exists('warranty', $criterias) ? '%' :  $criterias['warranty'] );
         $waterproof = (!array_key_exists('waterproof', $criterias) ? '%' :  $criterias['waterproof'] );
@@ -205,11 +202,11 @@ class DeviceFactory extends Factory {
                 " and COALESCE(storage, " . PHP_INT_MAX . ") <= " . $storageMax .
                 " and COALESCE(software, '') like '" . $software . "'";
 
-        if (array_key_exists('flash', $criterias) and is_bool($criterias['flash'])) {
+        if (array_key_exists('flash', $criterias) && is_bool($criterias['flash'])) {
             $flash = ($criterias['flash']) ? 'true' : 'false';
             $criteria .= " and flash = " . $flash;
         }
-        if (array_key_exists('externalStorage', $criterias) and is_bool($criterias['externalStorage'])) {
+        if (array_key_exists('externalStorage', $criterias) && is_bool($criterias['externalStorage'])) {
             $storage = $flash = ($criterias['externalStorage']) ? 'true' : 'false';
             $criteria .= " and externalStorage = " . $storage;
         }

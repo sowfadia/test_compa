@@ -1,11 +1,13 @@
 <?php
   function nvl($var){
-    if (is_null($var)) return '-';
-    return $var;
+    if (is_null($var)) {
+        return '-';
+    } else {
+        return $var;
+    }
   }
 
   function generateHTMLDevice($device){
-    $id = nvl($device->getId());
     $brand = nvl($device->getBrand());
     $model = nvl($device->getModel());
     
@@ -39,7 +41,6 @@
         
     $warranty = nvl($device->getWarranty());
     $waterproof = nvl($device->getWaterproof());
-    $provider = nvl($device->getProvider());
     
  
     return '<div class="smartphone-prop-container">

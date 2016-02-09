@@ -26,11 +26,11 @@ class UserFactory extends Factory{
      * @return ProviderFactory, the Factory's singleton
      */
     public static function getInstance(){
-        if(is_null(self::$instance)) {
-            self::$instance = new UserFactory();  
-            self::$tableName = "compa.users";
+        if(is_null(static::$instance)) {
+            static::$instance = new UserFactory();  
+            static::$tableName = "compa.users";
         }
-        return self::$instance;
+        return static::$instance;
     }
   
     /**
@@ -39,7 +39,7 @@ class UserFactory extends Factory{
      * @return int, an integer corresponding to the number of lines deleted; 0 if the connection is not set yet or no line has been modified
      */
     public function getUsers() {
-        return parent::getAll(self::$tableName);
+        return parent::getAll(static::$tableName);
     }
 
     /**
@@ -48,7 +48,7 @@ class UserFactory extends Factory{
      * @return int, an integer corresponding to the number of lines deleted; 0 if the connection is not set yet or no line has been modified
      */
     public function findUserById($id) {
-        return parent::findById(self::$tableName, $id);
+        return parent::findById(static::$tableName, $id);
     }
     
     /**
@@ -57,7 +57,7 @@ class UserFactory extends Factory{
      * @return int, an integer corresponding to the number of lines deleted; 0 if the connection is not set yet or no line has been modified
      */
     public function deleteUser($id) {
-       return parent::delete(self::$tableName, $id);
+       return parent::delete(static::$tableName, $id);
     }
     
     /**
@@ -67,7 +67,7 @@ class UserFactory extends Factory{
      * @return int, an integer corresponding to the number of lines updated; 0 if the connection is not set yet or no line has been modified
      */
     public function updateUser($id,$fields){
-        return parent::update(self::$tableName, $id, $fields);
+        return parent::update(static::$tableName, $id, $fields);
     }
     
     /**
@@ -85,7 +85,7 @@ class UserFactory extends Factory{
      */
     protected function toSql($user) {
         if(!is_null($user) && ($user instanceof User)){
-            return "insert into ".self::$tableName."(\"email\",\"password\",\"firstname\",\"lastname\") values ("
+            return "insert into ".static::$tableName."(\"email\",\"password\",\"firstname\",\"lastname\") values ("
                     .$this->paramToSql($user->getEmail()).","
                     .$this->paramToSql($user->getPassword()).","
                     .$this->paramToSql($user->getFirstName()).","
@@ -108,6 +108,6 @@ class UserFactory extends Factory{
     }
     
     public static function getTableName(){
-       return self::$tableName;
+       return static::$tableName;
     }
 }

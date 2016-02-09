@@ -23,10 +23,10 @@ class SurveyFactory extends Factory{
      * @return ProviderFactory, the Factory's singleton
      */
     public static function getInstance(){
-        if(is_null(self::$instance)) {
-            self::$instance = new SurveyFactory();  
+        if(is_null(static::$instance)) {
+            static::$instance = new SurveyFactory();  
         }
-        return self::$instance;
+        return static::$instance;
     }
     
 

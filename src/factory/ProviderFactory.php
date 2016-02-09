@@ -74,7 +74,7 @@ class ProviderFactory extends Factory{
      * create a new provider in the DB out of the given provider representing a provider
      * @param type $provider the new provider
      */
-    public function createProvider(Provider $provider){
+    public function createProvider($provider){
         return parent::create($this->tableName, $provider);
     }
     
@@ -84,15 +84,18 @@ class ProviderFactory extends Factory{
      * @return String, a string reprenting the provider
      */
     protected function toSql($provider) {
-       return "insert into ".$this->tableName." values (".$this->paramToSql($provider->getName()).","
-               .$this->paramToSql($provider->getEmail()).",".$this->paramToSql($provider->getTelephone()).","
-               .$this->paramToSql($provider->getContactpage()).","
-               .$this->paramToSql($provider->getAddresse()).","
-               .$this->paramToSql($provider->getContactpreference()).","
-               .$this->paramToSql($provider->getDescription()).","
-               .$this->paramToSql($provider->getProfil()).","
-               .$this->paramToSql($provider->getUrlProducts()).","
-               .$this->paramToSql($provider->getPassword()).")";
+        if(!is_null($device) && ($device instanceof Provider)){
+            return "insert into ".$this->tableName." values (".$this->paramToSql($provider->getName()).","
+                    .$this->paramToSql($provider->getEmail()).",".$this->paramToSql($provider->getTelephone()).","
+                    .$this->paramToSql($provider->getContactpage()).","
+                    .$this->paramToSql($provider->getAddresse()).","
+                    .$this->paramToSql($provider->getContactpreference()).","
+                    .$this->paramToSql($provider->getDescription()).","
+                    .$this->paramToSql($provider->getProfil()).","
+                    .$this->paramToSql($provider->getUrlProducts()).","
+                    .$this->paramToSql($provider->getPassword()).")";
+        }
+        throw new Exception("the parameter is not an instantance of Provider, param = ".$provider, null, null);
     }
 
     /**

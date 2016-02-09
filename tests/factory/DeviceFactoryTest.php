@@ -94,7 +94,7 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
         $this->assertTrue(count($return) > 0);
     } 
     
-       /**
+    /**
      * @test
      */
     public function shouldExecuteDeviceCRUD(){
@@ -107,9 +107,15 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
         $criteria = array();
         $criteria['brand'] = "MyTestBrandName";
         $devices = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,null);
-        $deleteReturn = DeviceFactory::getInstance()->deleteDevice($devices[0]->getId());
-        $this->assertNotNull($deleteReturn);
-        $this->assertEquals(1,$deleteReturn);  
+        $fields['brand'] = "MyTestBrandName2";
+        $updateReturn = DeviceFactory::getInstance()->updateDevice($devices[0]->getId(),$fields);
+        $this->assertNotNull($updateReturn);
+        $this->assertEquals(1,$updateReturn);
+        $devices = DeviceFactory::getInstance()->findByCriteriaImpl($fields,null);
+        $this->assertEquals("MyTestBrandName2",$devices[0]->getBrand());
+//        $deleteReturn = DeviceFactory::getInstance()->deleteDevice($devices[0]->getId());
+//        $this->assertNotNull($deleteReturn);
+//        $this->assertEquals(1,$deleteReturn);  
     }
     
 }

@@ -56,4 +56,13 @@ class ProviderFactoryTest extends PHPUnit_Framework_TestCase {
         $this->assertNotNull($return);
     } 
     
+     /**
+     * @test
+     */
+    public function shouldExecuteProviderCRUD(){
+        ProviderFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
+        $return=ProviderFactory::getInstance()->findProviderById(1);
+        $this->assertNotNull($return);
+    } 
+    
 }

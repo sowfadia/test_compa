@@ -98,21 +98,6 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
      * @test
      */
     public function shouldExecuteDeviceCRUD(){
-        
-//       $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);
-//       $con->connect();
-//       $createReturn=$con->executeCreate("insert into compa.users(\"email\",\"password\",\"firstname\",\"lastname\") values ('sow@sow.fr', 'sow', 'Fatou', 'SOW')");
-//       $this->assertNotNull($createReturn);
-//       $QueryReturn=$con->executeQuery("select * from compa.users where email like 'sow@sow.fr'");
-//       $this->assertNotNull($QueryReturn);
-//       $this->assertTrue(count($QueryReturn) > 0);
-//       $updateReturn=$con->executeUpdate("update compa.users set firstname = 'Fatoumata' where id=".$QueryReturn[0]["id"]);
-//       $this->assertNotNull($updateReturn);
-//       $this->assertTrue($updateReturn == 1);
-//       $deleteReturn=$con->executeDelete("delete from compa.users where id=".$QueryReturn[0]["id"]);
-//       $this->assertNotNull($deleteReturn);
-//       $this->assertTrue($deleteReturn == 1);
-        
         $device = new Device(-1,1, "MyTestBrandName", "S6", 800, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
         DeviceFactory::getInstance()->setConnection(self::$con);
         $this->assertTrue(DeviceFactory::getInstance()->isConnectionSet());

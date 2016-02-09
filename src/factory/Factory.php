@@ -181,7 +181,7 @@ abstract class Factory {
   */
    protected function getListTextFieldValues($tableName,$textfieldName) {
         if ($this->isConnectionSet()) {
-            $sql = "select distinct(" . $textfieldName . ") from ".$tableName;
+            $sql = "select distinct(" . $textfieldName . ") from ".$tableName." where ".$textfieldName." is not null order by 1";
             $values = $this->connection->executeQuery($sql);
             return $values;
         }

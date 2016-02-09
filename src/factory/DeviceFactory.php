@@ -211,7 +211,7 @@ class DeviceFactory extends Factory {
             $criteria .= " and externalStorage = " . $storage;
         }
       
-      if(!is_null($priorities)){
+      if(!is_null($priorities) && count($priorities) > 0 ){
         $criteria .= " order by ";
         foreach($priorities as $priority){
           $criteria .= $priority["priority"]." ".$priority["order"].", ";

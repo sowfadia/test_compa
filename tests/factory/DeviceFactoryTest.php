@@ -111,7 +111,7 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
         $updateReturn = DeviceFactory::getInstance()->updateDevice($devices[0]->getId(),$fields);
         $this->assertNotNull($updateReturn);
         $this->assertEquals(1,$updateReturn);
-        $devices = DeviceFactory::getInstance()->findByCriteriaImpl($fields,null);
+        $devices = DeviceFactory::getInstance()->findDeviceById($devices[0]->getId());
         $this->assertEquals("MyTestBrandName2",$devices[0]->getBrand());
         $deleteReturn = DeviceFactory::getInstance()->deleteDevice($devices[0]->getId());
         $this->assertNotNull($deleteReturn);

@@ -64,7 +64,7 @@ class SearchFactory extends Factory{
           $record['id'],$record['iduser'],
           $record['brand'],$record['pricemin'],
           $record['pricemax'], $record['warranty'],
-          $record['waterproof'], $record['screenDefinition'],
+          $record['waterproof'], $record['screendefinition'],
           $record['screenResolutionmin'],$record['screenResolutionmax'],
           $record['screensizemin'],$record['screensizemax'],$record['screenpanel'],
           $record['cpumodel'], $record['cpufrequencymin'], $record['cpufrequencymax'],

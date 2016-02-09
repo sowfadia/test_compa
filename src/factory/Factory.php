@@ -154,9 +154,9 @@ abstract class Factory {
         if($this->isConnectionSet() && $fields){
             $sql="update ".$tableName." set ";
             foreach ($fields as $key => $value) {
-               $sql.= $key."=".$value; 
+               $sql.= $key." = ".  $this->paramToSql($value); 
             }
-            $sql.=" where id=".$id;
+            $sql.=" where id = ".$id;
             return $this->connection->executeUpdate($sql);
         }
          throw new ConnectionNotSetException();

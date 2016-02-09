@@ -60,8 +60,8 @@ class SearchFactoryTest extends PHPUnit_Framework_TestCase {
      * @test
      */
     public function shouldExecuteSearchCRUD(){
-        $user=new User(-1,"XXX", "XXX", "sowfadia@sowfadia.com", "XXX",(new DateTime())->getTimestamp());
-        UserFactory::getInstance()->setConnection(self::$con);
+        $user=new User(-1,"searchUser", "searchUser", "sowfadia@sowfadia.com", "searchUser",(new DateTime())->getTimestamp());
+        UserFactory::getInstance()->setConnection(static::$con);
         UserFactory::getInstance()->createUser($user);
         $criteria = "email like '" . $user->getEmail(). "'";
         $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);

@@ -81,7 +81,7 @@ class SearchFactory extends Factory{
     }
 
     protected function toSql($search) {
-        if(!is_null($device) && ($device instanceof Search)){
+        if(!is_null($search) && ($search instanceof Search)){
             return "insert into ".$this->tableName."(\"iduser\",\"brand\",\"pricemin\",\"pricemax\","
                     ."\"warranty\",\"waterproof\",\"screendefinition\",\"screenresolutionmin\",\"screenResolutionmax\","
                     . "\"screensizemin\",\"screensizeMax\",\"screenpanel\",\"cpumodel\",\"cpufrequencymin\",\"cpufrequencymax\","

@@ -3,11 +3,7 @@
 require_once ('Factory.php');
 require_once (__DIR__.'/../model/Provider.php');
 
-/**
- * Factory in charge of managing providers
- *
- * @author sowf
- */
+
 class ProviderFactory extends Factory{   
     private $tableName="compa.provider";
   
@@ -28,10 +24,10 @@ class ProviderFactory extends Factory{
      * @return ProviderFactory, the Factory's singleton
      */
     public static function getInstance(){
-        if(is_null(self::$instance)) {
-            self::$instance = new ProviderFactory();  
+        if(is_null(static::$instance)) {
+            static::$instance = new ProviderFactory();  
         }
-        return self::$instance;
+        return static::$instance;
     }
     
     /**
@@ -74,8 +70,8 @@ class ProviderFactory extends Factory{
      * create a new provider in the DB out of the given provider representing a provider
      * @param type $provider the new provider
      */
-    public function createProvider(Provider $provider){
-        return parent::create($this->tableName, $provider);
+    public function createProvider($provider){
+        return parent::create($provider);
     }
     
     /**
@@ -84,10 +80,22 @@ class ProviderFactory extends Factory{
      * @return String, a string reprenting the provider
      */
     protected function toSql($provider) {
-       return "(".$provider->getName().",".$provider->getEmail().",".$provider->getTelephone().","
-               .$provider->getContactpage().",".$provider->getAddresse().",".$provider->getContactpreference().","
-               .$provider->getDescription().",".$provider->getProfil().",".$provider->getUrlProducts().","
-               .$provider->getPassword().")";
+       if(!is_null($provider) && ($provider instanceof Provider)){
+             return "insert into ".$this->tableName."(\"name\",\"email\",\"telephone\",\"contactpage\","
+                     ."\"address\",\"password\",\"contactpreference\",\"profil\","
+                     . "\"description\",\"urlproducts\") values ("
+                     .$this->paramToSql($provider->getName()).","
+                     .$this->paramToSql($provider->getEmail()).","
+                     .$this->paramToSql($provider->getTelephone()).","
+                     .$this->paramToSql($provider->getContactpage()).","
+                     .$this->paramToSql($provider->getAddress()).","
+                     .$this->paramToSql($provider->getContactpreference()).","
+                     .$this->paramToSql($provider->getDescription()).","
+                     .$this->paramToSql($provider->getProfil()).","
+                     .$this->paramToSql($provider->getUrlProducts()).","
+                     .$this->paramToSql($provider->getPassword()).")";
+         }
+         throw new Exception("the parameter is not an instance of Provider, param = ".$provider, null, null);
     }
 
     /**
@@ -104,5 +112,25 @@ class ProviderFactory extends Factory{
           $record['profil'], $record['description'],
           $record['urlproducts']
         );
+    }
+    
+    public function findByCriteriaImpl($criterias){
+         $criteriaString="";
+         $nbfields = count($criterias);
+         foreach ($criterias as $key => $value) {
+           $criteriaString .= $key." = ".$this->paramToSql($value)."";
+           $nbfields --;
+           if($nbfields > 0) {
+               $criteriaString .= " and "; 
+           }
+         }
+         return parent::findByCriteria($this->tableName, $criteriaString);
+     }
+    
+     public function authenticateProvider($email, $password) {
+        $criterias = array();
+        $criterias ["email"]= $email;
+        $criterias ["password"] = $password;
+        return $this->findByCriteriaImpl($criterias);
     }
 }

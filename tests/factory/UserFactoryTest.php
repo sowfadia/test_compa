@@ -20,6 +20,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
      * @expectedException ConnectionNotSetException
      */
     public function shouldNotCreateUser(){
+       UserFactory::getInstance()->unsetConnection();
        $user=new User(-1,"fds", "fds", "fds", "fds", new DateTime());
        $nbrow = UserFactory::getInstance()->createUser($user);
     }
@@ -39,7 +40,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
      */
     public function shouldCreateUser(){
        $user=new User(-1,"fds", "fds", "fds", "fds", new DateTime());
-        UserFactory::getInstance()->setConnection(self::$con);
+        UserFactory::getInstance()->setConnection(static::$con);
         $this->assertTrue(UserFactory::getInstance()->isConnectionSet());
         $nbrow = UserFactory::getInstance()->createUser($user);
         $this->assertEquals(1,$nbrow);      
@@ -115,7 +116,7 @@ class UserFactoryTest extends PHPUnit_Framework_TestCase{
     /**
      * @test
      */
-    public function deleteRemainingAddedUsers(){
+    public function deleteUsers(){
         UserFactory::getInstance()->setConnection(self::$con);
         $criteria = "email like 'sowfadia@hotmail.com'";
         $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);

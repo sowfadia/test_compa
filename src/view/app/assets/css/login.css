@@ -1,0 +1,12 @@
+html{
+    width: 100%;
+    min-width: 420px;
+    height: 100%;
+    background:#F5F5F6;
+    background: url(../img/background-login.png) no-repeat left fixed;
+    background-size: cover;
+}
+
+.input-row{
+  margin-bottom: 0px;
+}

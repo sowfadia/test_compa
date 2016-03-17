@@ -1,37 +1,36 @@
 <?php
 
-/**
- * Description of Survey
- *
- * @author sowf
- */
 class Survey {
     private $id;
-    private $user;
-    private $search;
-    private $percentage;
+    private $iduser;
+    private $idsearch;
+    private $note;
     
-    function __construct($id, $user, $search, $percentage) {
-       $this->id=$id;
-        $this->user = $user;
-        $this->search = $search;
-        $this->percentage = $percentage;
-    }
-    
-    function getId() {
-        return $this->id;
+    function __construct($id, $iduser, $idsearch, $note) {
+         $this->id = $id;
+         $this->iduser = $iduser;
+         $this->idsearch = $idsearch;
+         $this->note = $note;
     }
     
-    function getUser() {
-        return $this->user;
-    }
-
-    function getSearch() {
-        return $this->search;
-    }
-
-    function getPercentage() {
-        return $this->percentage;
-    }
+    function getIduser() {
+         return $this->iduser;
+     }
+ 
+     function getIdsearch() {
+         return $this->idsearch;
+     }
+ 
+     function getNote() {
+         return $this->note;
+     }
+ 
+     function setId($id) {
+         $this->id = $id;
+     }
+ 
+     function setIduser($iduser) {
+         $this->iduser = $iduser;
+     }
     
 }

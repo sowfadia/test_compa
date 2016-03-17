@@ -1,10 +1,5 @@
 <?php
 
-/**
- * Description of SurveyFactory
- *
- * @author sowf
- */
 class SurveyFactory extends Factory{
     private $tableName="compa.survey";
     
@@ -23,10 +18,10 @@ class SurveyFactory extends Factory{
      * @return ProviderFactory, the Factory's singleton
      */
     public static function getInstance(){
-        if(is_null(self::$instance)) {
-            self::$instance = new SurveyFactory();  
+        if(is_null(static::$instance)) {
+            static::$instance = new SurveyFactory();  
         }
-        return self::$instance;
+        return static::$instance;
     }
     
 
@@ -50,15 +45,14 @@ class SurveyFactory extends Factory{
     }
     
    
-    public function createSurvey(Survey $user){
-       return parent::create($this->tableName, $user);
+    public function createSurvey($survey){
+       return parent::create($survey);
     }
     
     protected function toObject($record) {
         return new Survey(
-          $record['id'],$record['user'],
-          $record['search'],$record['email'],
-          $record['percentage']
+          $record['id'],$record['iduser'],
+          $record['idsearch'],$record['note']
         );
     }
 

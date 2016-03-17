@@ -1,10 +1,5 @@
 <?php
 
-/**
- * Description of provider
- *
- * @author sowf
- */
 class Provider {
     private $id;
     private $name;

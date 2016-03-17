@@ -68,7 +68,50 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
         DeviceFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
         $criteria = array();
         $criteria['brand'] = "Samsung";
-        DeviceFactory::getInstance()->findByCriteriaImpl($criteria,null);
+        $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,null);
+         $this->assertNotNull($return);
+         $this->assertTrue(count($return) > 0);
+         $tabPriorities=array();
+         $tabPriorities[0]['priority'] = "price";
+         $tabPriorities[0]['order'] = "ASC";
+         $return = NULL;
+         $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,$tabPriorities);
+         $this->assertNotNull($return);
+         $this->assertTrue(count($return) > 0);
+         $criteria['flash'] = true;
+         $return = NULL;
+         $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,$tabPriorities);
+         $this->assertNotNull($return);
+         $this->assertTrue(count($return) > 0);
+         $criteria['externalStorage'] = "true";
+         $return = NULL;
+         $return = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,$tabPriorities);
+         $this->assertNotNull($return);
+         $this->assertTrue(count($return) > 0);
     } 
+    
+   /**
+      * @test
+      */
+     public function shouldExecuteDeviceCRUD(){
+         $device = new Device(-1,1, "MyTestBrandName", "S6", 800, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+         DeviceFactory::getInstance()->setConnection(self::$con);
+         $this->assertTrue(DeviceFactory::getInstance()->isConnectionSet());
+         $createReturn = DeviceFactory::getInstance()->createDevice($device);
+         $this->assertNotNull($createReturn);
+         $this->assertEquals(1,$createReturn);  
+         $criteria = array();
+         $criteria['brand'] = "MyTestBrandName";
+         $devices = DeviceFactory::getInstance()->findByCriteriaImpl($criteria,null);
+         $fields['brand'] = "MyTestBrandName2";
+         $updateReturn = DeviceFactory::getInstance()->updateDevice($devices[0]->getId(),$fields);
+         $this->assertNotNull($updateReturn);
+         $this->assertEquals(1,$updateReturn);
+         $devices = DeviceFactory::getInstance()->findDeviceById($devices[0]->getId());
+         $this->assertEquals("MyTestBrandName2",$devices[0]->getBrand());
+         $deleteReturn = DeviceFactory::getInstance()->deleteDevice($devices[0]->getId());
+         $this->assertNotNull($deleteReturn);
+         $this->assertEquals(1,$deleteReturn);  
+     } 
     
 }

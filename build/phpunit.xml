@@ -14,13 +14,13 @@
 
   <filter>
     <whitelist addUncoveredFilesFromWhitelist="true">
+      <directory suffix=".php">../src/factory</directory>
+      <directory suffix=".php">../src/model</directory>
+      <directory suffix=".php">../utils</directory>
       <directory suffix=".php">../src</directory>
       <exclude>
         <file>src/bootstrap.php</file>
       </exclude>
-      <exclude>src/controller/</exclude>
-      <exclude>src/exeption/</exclude>
-      <exclude>src/view/</exclude>
     </whitelist>
   </filter>
 </phpunit>

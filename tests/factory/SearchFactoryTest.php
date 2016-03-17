@@ -76,7 +76,7 @@ class SearchFactoryTest extends PHPUnit_Framework_TestCase {
          $criteria = array();
          $criteria['iduser'] = $USER_FROM_DB[0]->getId();
          $searches = SearchFactory::getInstance()->findByCriteriaImpl($criteria);
-         $this->assertEquals($USER_FROM_DB[0]->getId(),$searches[0]->getUser());
+         $this->assertEquals($USER_FROM_DB[0]->getId(),$searches[0]->getIduser());
          $fields['brand'] = "Samsung";
          $updateReturn = SearchFactory::getInstance()->updateSearch($searches[0]->getId(),$fields);
          $this->assertNotNull($updateReturn);

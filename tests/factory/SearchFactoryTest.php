@@ -60,7 +60,7 @@ class SearchFactoryTest extends PHPUnit_Framework_TestCase {
       * @test
       */
      public function shouldExecuteSearchCRUD(){
-         $user=new User(-1,"searchUser", "searchUser", "sowfadia@sowfadia.com", "searchUser",(new DateTime())->getTimestamp());
+         $user=new User(-1,"searchUser", "searchUser", "sowfadia@fds.com", "searchUser",(new DateTime())->getTimestamp());
          UserFactory::getInstance()->setConnection(static::$con);
          UserFactory::getInstance()->createUser($user);
          $criteria = "email like '" . $user->getEmail(). "'";
@@ -77,12 +77,12 @@ class SearchFactoryTest extends PHPUnit_Framework_TestCase {
          $criteria['iduser'] = $USER_FROM_DB[0]->getId();
          $searches = SearchFactory::getInstance()->findByCriteriaImpl($criteria);
          $this->assertEquals($USER_FROM_DB[0]->getId(),$searches[0]->getIduser());
-         $fields['brand'] = "Samsung";
+         $fields['frequency'] = 2;
          $updateReturn = SearchFactory::getInstance()->updateSearch($searches[0]->getId(),$fields);
          $this->assertNotNull($updateReturn);
          $this->assertEquals(1,$updateReturn);
          $searches = SearchFactory::getInstance()->findSearchById($searches[0]->getId());
-         $this->assertEquals("Samsung",$searches[0]->getBrand());
+         $this->assertEquals(2,$searches[0]->getFrequency());
          $deleteReturn = SearchFactory::getInstance()->deleteSearch($searches[0]->getId());
          $this->assertNotNull($deleteReturn);
          $this->assertEquals(1,$deleteReturn);  

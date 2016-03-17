@@ -77,7 +77,7 @@ class ProviderFactoryTest extends PHPUnit_Framework_TestCase {
          $this->assertEquals(1,$updateReturn);
          $providers = ProviderFactory::getInstance()->findProviderById($PROVIDER_FROM_DB[0]->getId());
          $this->assertEquals("fff",$providers[0]->getName());
-         $this->assertEquals(urlproducts,$providers[0]->getUrlproducts());
+         $this->assertEquals("urlproducts",$providers[0]->getUrlproducts());
          $this->assertEquals("sowfadia@fds.com",$providers[0]->getEmail());
          $this->assertEquals("03030303",$providers[0]->getTelephone());
          $this->assertEquals(NULL,$providers[0]->getContactpage());

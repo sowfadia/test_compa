@@ -44,6 +44,7 @@ class LinksFactoryTest extends PHPUnit_Framework_TestCase {
      */
     public function shouldNotFindLinks(){
         LinksFactory::getInstance()->unsetConnection();//to unset the connection already set before
+        $this->assertFalse(LinksFactory::getInstance()->isConnectionSet());
         LinksFactory::getInstance()->findLinkById(1);
     } 
     

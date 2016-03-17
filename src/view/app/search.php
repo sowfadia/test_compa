@@ -5,10 +5,6 @@
   }
 
   function generateHTMLDevice($device){
-    //$image = 'http://media.ldlc.com/ld/products/00/02/84/13/LD0002841308_1.jpg';
-    $image = nvl($device->getImage());
-    if ($image == '-') $image = 'https://placeholdit.imgix.net/~text?txtsize=33&txt=...&w=350&h=500';
-
     $id = nvl($device->getId());
     $brand = nvl($device->getBrand());
     $model = nvl($device->getModel());
@@ -19,11 +15,6 @@
     
     $storage = nvl($device->getStorage());
     $externalstorage = nvl($device->getExternalStorage());
-    if($externalstorage){
-      $externalstorage = "yes";
-    }else{
-      $externalstorage = 'no';
-    }
 
     $software = nvl($device->getSoftware());
     
@@ -45,65 +36,47 @@
     $cameraresolution = nvl($device->getCameraResolution());
     $frontcameraresolution = nvl($device->getFrontCameraResolution());
     $flash = nvl($device->getFlash());
-    if($flash){
-      $flash = "yes";
-    }else{
-      $flash = 'no';
-    }
         
     $warranty = nvl($device->getWarranty());
     $waterproof = nvl($device->getWaterproof());
     $provider = nvl($device->getProvider());
-    $link = $device->getIdFromProvider();
-    $buylink = "";
-
-    if (isset($_SESSION['id'])){
-      $buylink = '/src/?page=links&idProvider='. $provider .'&redirect='. $link .'&idUser='. $_SESSION['id'];
-    }
-    else {
-      $buylink = '/src/?page=links&idProvider='. $provider .'&redirect='. $link;
-    }
     
  
     return '<div class="smartphone-prop-container">
           <div class="card">
-          <div class="card-content" style="padding:0px;">
-            <ul class="collection with-header" style="margin:0px; border: 0px;">
-              <li class="collection-header grey lighten-3">'.$brand.'</li>
-              <li class="collection-header grey lighten-3">'.$model.'</li>
-            </ul>
-          </div>
             <div class="card-image">
-              <img src="'. $image . '">
+              <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=...&w=350&h=500">
+              <span class="card-title">'.$brand.' '.$model.'</span>
             </div>
             <div class="card-content" style="padding:0px">
               <ul class="collection with-header" style="margin:0px;">
-                <li class="collection-header grey lighten-3">Price : '.$price.' €</li>
+                <li class="collection-header grey lighten-3">Price : '.$price.'</li>
                 <li class="collection-header grey lighten-3">Battery</li>
-                  <li class="collection-item">'.$batterycapacity.' maH</li>
+                  <li class="collection-item">'.$batterycapacity.'</li>
                 <li class="collection-header grey lighten-3">Storage and Memory</li>
-                  <li class="collection-item">Storage : '.$storage.' GB</li>
+                  <li class="collection-item">Storage : '.$storage.'</li>
                   <li class="collection-item">External Storage : '.$externalstorage.'</li>
+                <li class="collection-header grey lighten-3">Connectivity</li>
                 <li class="collection-header grey lighten-3">OS</li>
                   <li class="collection-item">'.$software.'</li>
                 <li class="collection-header grey lighten-3">Size and Weight</li>
-                  <li class="collection-item">Heigh : '.$sizeheigh.' mm</li>
-                  <li class="collection-item">Width : '.$sizewidth.'  mm</li>
-                  <li class="collection-item">Thickness : '.$sizethickness.' mm</li>
-                  <li class="collection-item">Weight : '.$weight.' g</li>
+                  <li class="collection-item">Heigh : '.$sizeheigh.'</li>
+                  <li class="collection-item">Width : '.$sizewidth.'</li>
+                  <li class="collection-item">Thickness : '.$sizethickness.'</li>
+                  <li class="collection-item">Weight : '.$weight.'</li>
                 <li class="collection-header grey lighten-3">Display</li>
                   <li class="collection-item">Screen Definition : '.$screendefinition.'</li>
-                  <li class="collection-item">Screen Resolution : '.$screenresolution.' ppi</li>
-                  <li class="collection-item">Screen Size : '.$screensize.'"</li>
+                  <li class="collection-item">Screen Resolution : '.$screenresolution.'</li>
+                  <li class="collection-item">Screen Size : '.$screensize.'</li>
                   <li class="collection-item">Screen Panel : '.$screenpanel.'</li>
                 <li class="collection-header grey lighten-3">Hardware</li>
-                  <li class="collection-item">CPU Model : '.$cpumodel.' </li>
-                  <li class="collection-item">CPU Frequency : '.$cpufrequency.' GHz</li>
+                  <li class="collection-item">CPU Model : '.$cpumodel.'</li>
+                  <li class="collection-item">CPU Frequency : '.$cpufrequency.'</li>
                   <li class="collection-item">Core : '.$cpucore.'</li>
-                  <li class="collection-item">RAM : '.$ram.' GB</li>
+                  <li class="collection-item">RAM : '.$ram.'</li>
                 <li class="collection-header grey lighten-3">Camera</li>
-                  <li class="collection-item">Resolution : '.$cameraresolution.' MP</li>
-                  <li class="collection-item">Front Camera Resolution : '.$frontcameraresolution.' MP</li>
+                  <li class="collection-item">Resolution : '.$cameraresolution.'</li>
+                  <li class="collection-item">Front Camera Resolution : '.$frontcameraresolution.'</li>
                   <li class="collection-item">Flash : '.$flash.'</li>
                 <li class="collection-header grey lighten-3">Additional Informations</li>
                   <li class="collection-item">Waterproof : '.$waterproof.'</li>
@@ -114,20 +87,16 @@
               <a class="waves-effect waves-light btn" style="width:100%" href="#">Contacter</a>
             </div>
             <div class="card-action">
-              <a class="waves-effect waves-light btn" style="width:100%" href="'. $buylink .'">Acheter</a>
+              <a class="waves-effect waves-light btn" style="width:100%" href="#">Acheter</a>
             </div>
           </div>
         </div>';
   }
 
-  function generateHTMLSelect($label, $name, $values, $sidebar){
+  function generateHTMLSelect($label, $name, $values){
     $result = '';
     $result = $result . '<div class="input-wrapper">';
-    if ($sidebar)
-      $result = $result . '<div class="input-field col s12">';
-    else
-      $result = $result . '<div class="input-field col s12 m6">';
-
+    $result = $result . '<div class="input-field col s12">';
     $result = $result . '<select name="'.$name.'" onChange="addSelectCriteria(\''.$name.'\', this)">';
 
     foreach ($values as $value){
@@ -141,225 +110,146 @@
     
     return $result;
    }
-
-  function generateHTMLSlider($label, $name){
-    $result = '';
-    $result .= '<div class="input-wrapper">';
-    $result .= '<div class="input-field col s12">';
-    $result .= '<div class="sliders" id="'. $name . '-slider"></div>';
-    $result .= '<label>' . $label . '</label>';
-    $result .= '<p style="margin-bottom:1.5em"></p>';
-    $result .= '</div>';
-    $result .= '</div>'; 
-
-    return $result;
-  }
-
-  function generateJSMinMax($field, $values, $id){
-
-    $result = '';
-    $result .= 'var slider_' . $id . ' = document.getElementById("' . $id . '-slider");' ;
-    $result .= 'noUiSlider.create(slider_' . $id . ', {';
-    $result .= 'start: [' . $values['minvalue'] . ', ' . $values['maxvalue'] . '],';
-    $result .= 'connect: true,';
-    $result .= 'step: 1,';
-    $result .= 'range: {';
-    $result .= '\'min\': ' . $values['minvalue'] . ',';
-    $result .= '\'max\': ' . $values['maxvalue'];
-    $result .= '},';
-    $result .= 'format: wNumb({decimals: 0})';
-    $result .= '});';
-
-    $result .= 'slider_' . $id . '.noUiSlider.on("set", function(event, values) {';
-    $result .= 'addSliderCriteria("' . $field . 'min", slider_' . $id . '.noUiSlider.get()[0]);';
-    $result .= 'addSliderCriteria("' . $field . 'max", slider_' . $id . '.noUiSlider.get()[1]);';
-    
-    $result .= '});';
-
-
-    return $result;
-  }
 ?>
-  <html>
 
-  <head>
-    <title>Comparofone</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link type="text/css" rel="stylesheet" href="./view/app/bower_components/Materialize/bin/materialize.css" media="screen,projection" />
-    <link type="text/css" rel="stylesheet" href="./view/app/bower_components/Materialize/extras/noUiSlider/nouislider.css">
-    <link type="text/css" rel="stylesheet" href="./view/app/assets/css/style.css">
-    <link type="text/css" rel="stylesheet" href="./view/app/assets/css/lib/perfect-scrollbar.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  </head>
+<html>
 
-  <body>
-    <header>
-      <?php require './view/app/navbar.php' ?>
+<head>
+  <title>Materialize CSS Framework Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link type="text/css" rel="stylesheet" href="./view/app/bower_components/Materialize/bin/materialize.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="./view/app/bower_components/Materialize/extras/noUiSlider/nouislider.css">
+  <link type="text/css" rel="stylesheet" href="./view/app/assets/css/style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
 
-      <ul id="slide-out" class="side-nav fixed">
-        <li class="logo">
-          <a href="/src/" title="logo" id="logo-container">
-            <img src="./view/app/assets/img/logo.png" alt="">
-          </a>
-        </li>
-        <li class="divider">
-          <div class="divider"></div>
-        </li>
-        <li class="input">
-          <p class="ultra-small margin" style="padding-bottom: 15px;">Search</p>
-        </li>
-        <li class="input">
-          <?php echo generateHTMLSlider('Price', 'price_side'); ?>
-        </li>
-        <li class="input">
-          <?php echo generateHTMLSelect('Brand', 'brand', $allBrand, true);?>
-        </li>
-        <li class="row input">
-          <button onclick="$('#search-modal').openModal()" class="col s12 btn waves-effect waves-light modal-trigger">More Criterias</button>
-        </li>
-        <li class="divider">
-          <div class="divider"></div>
-        </li>
-        <li class="input">
-          <p class="ultra-small margin">Sorting</p>
-        </li>
-        <li class="input" style="padding-bottom: 15px;">
-          <div class="switch">
-            <label class="valign-wrapper" style="justify-content: center;">
-                            ASC<i class="mdi-hardware-keyboard-arrow-up small icon-demo valign"></i>
-                            <input id="sorting-direction-checkbox" type="checkbox">
-                            <span class="lever valign"></span>
-                            <i class="mdi-hardware-keyboard-arrow-down small icon-demo valign"></i>DESC
-                        </label>
+<body>
+  <header>
+    <nav class="grey">
+      <a href="#" data-activates="slide-out" class="button-collapse">
+        <i class="medium material-icons">search</i>
+      </a>
+      <div class="nav-wrapper right" style="padding-right:16px">
+        <!--
+          <a class="btn-floating waves-effect waves-light red" href="#"></a>
+          <a class="btn-floating waves-effect waves-light red" href="#"></a>
+        -->
+        <button data-target="login" class="btn modal-trigger" style="margin-top:6px">Login</button>
+      </div>
+    </nav>
+    <form action="/comparofone/src/?page=search" method="GET">
+    <input type="hidden" name="search">
+    <ul id="slide-out" class="side-nav fixed">
+      <li class="logo">
+        <a href="#" title="logo" id="logo-container">
+          <img src="./view/app/assets/img/logo.png" alt="">
+        </a>
+      </li>
+
+      <li class="input">
+        <div class="input-wrapper">
+          <div class="input-field col s12">
+            <div class="sliders" id="price-slider"></div>
+            <label>Price</label>
+            <p style="margin-bottom:1.5em"></p>
           </div>
-        </li>
-        <li class="input">
-          <div class="input-wrapper">
-            <div class="input-field col s12">
-              <select onchange="addSorting(this, event);">
-                                <option value="" selected="selected">Select criteria</option>
-                                <option value="batterycapacity">Battery Capacity</option>
-                                <option value="brand">Brand</option>
-                                <option value="cameraresolution">Camera Resolution</option>
-                                <option value="cpucore">Cpu Core</option>
-                                <option value="cpufrequency">Cpu Frequency</option>
-                                <option value="cpumodel">Cpu Model</option>
-                                <option value="externalstorage">External Storage</option>
-                                <option value="flash">Flash</option>
-                                <option value="frontcameraresolution">Front Camera Resolution</option>
-                                <option value="price">Price</option>
-                                <option value="ram">Ram</option>
-                                <option value="screendefinition">Screen Definition</option>
-                                <option value="screenpanel">Screen Panel</option>
-                                <option value="screenresolution">Screen Resolution</option>
-                                <option value="screensize">Screen Size</option>
-                                <option value="sizeheigh">Heigh</option>
-                                <option value="sizethickness">Thickness</option>
-                                <option value="sizewidth">Width</option>
-                                <option value="software">Software</option>
-                                <option value="storage">Storage</option>
-                                <option value="warranty">Warranty</option>
-                                <option value="waterproof">Waterproof</option>
-                                <option value="weight">Weight</option>
-                            </select>
-              <label>Sorting by</label>
-            </div>
-          </div>
-        </li>
-      </ul>
+        </div>
+      </li>
+      <li class="input"><?php echo generateHTMLSelect('Brand',                'brand',            $allBrand);?></li>
+      <li class="input"><?php echo generateHTMLSelect('Waterproofs',          'waterproof',       $allWaterproofs);?></li>
+      <li class="input"><?php echo generateHTMLSelect('ScreenDefinitions',    'screenDefinition', $allScreenDefinitions);?></li>
+      <li class="input"><?php echo generateHTMLSelect('ScreenPanels',         'screenPanel',      $allScreenPanels);?></li>
+      <li class="input"><?php echo generateHTMLSelect('CPUModels',            'CPUModel',         $allCPUModels);?></li>
+      <li class="input"><?php echo generateHTMLSelect('Softwares',            'software',         $allSoftwares);?></li>
+      <li class="input"><?php echo generateHTMLSelect('Softwares',            'software',         $allSoftwares);?></li>
+      <li class="input"><?php echo generateHTMLSelect('Softwares',            'software',         $allSoftwares);?></li>
+    </ul>
       
-    </header>
-    <main>
-      <div class="smartphone-container">
-        <div class="criteria-prop-container">
+    </form>
+    
+  </header>
+  <main>
+    <div class="smartphone-container">
+      <div class="vertical-scroll-container">
+        <div class="smartphone-prop-container">
           <div class="card" style="width:320px;">
             <div class="card-content" style="padding:0px">
-              <form action=".">
-                <ul class="collection with-header" style="margin:0px;">
-                  <li class="collection-header grey lighten-3">Your search</li>
-                  <li class="collection-item">
-                    <button class="btn waves-effect waves-light" style="width:100%" type="submit" name="search">Submit<i class="material-icons right">search</i>
-                                        </button>
+              <ul class="collection with-header" style="margin:0px;">
+                <li class="collection-header grey lighten-3">Your search</li>
+                <li class="collection-item">
+                  <a class="waves-effect waves-light btn" style="width:100%" href="#">Valider</a>
+                </li>
+                <ul class="collapsible" data-collapsible="accordion">
+                  <li>
+                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+                    <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
                   </li>
-                  <li class="collection-header">
-                    <div class="valign-wrapper"><i class="material-icons">reorder</i>Criterias</div>
+                  <li>
+                    <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+                    <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
                   </li>
-                  <li class="collection-item">
-                    <ul class="" id="criterias">
-                      <p>
-                        There is no critera selected yet.
-                      </p>
-                    </ul>
-                  </li>
-                  <li class="collection-header">
-                    <div class="valign-wrapper"><i class="material-icons">swap_vert</i>Sorting</div>
-                  </li>
-                  <li class="collection-item">
-                    <ul id="sortings">
-                      <p>No sorting filter added yet.</p>
-                    </ul>
+                  <li>
+                    <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+                    <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
                   </li>
                 </ul>
-              </form>
+                <div id="criterias">
+                  
+                </div>
+              </ul>
             </div>
           </div>
         </div>
-        <div class="vertical-scroll-container">
-          <?php 
+        
+        
+        <?php 
           if ($resultResearchDevices != NULL){
             foreach ($resultResearchDevices as $device) {
+              // print_r($device);
               echo generateHTMLDevice($device);
             }
            }
         ?>
-        </div>
-    </main>
-    <?php require './view/app/search-modal.php'; ?>
-    <!-- jQuery is required by Materialize to function -->
-    <script type="text/javascript" src="./view/app/bower_components/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="./view/app/bower_components/Materialize/bin/materialize.js"></script>
-    <script type="text/javascript" src="./view/app/bower_components/Materialize/extras/noUiSlider/nouislider.min.js"></script>
-    <script type="text/javascript" src="./view/app/assets/js/lib/perfect-scrollbar.min.js"></script>
-    <script type="text/javascript" src="./view/app/assets/js/main.js"></script>
-    <script type="text/javascript">
-      $(".button-collapse").sideNav();
-      $(document).ready(function() {
-        $('select').material_select();
-      });
-      <?php 
-
-      echo generateJSMinMax('price', $minMaxPrice, 'price_side');
+      </div>
+  </main>
     
-      echo generateJSMinMax('price', $minMaxPrice, 'price_modal');
-      echo generateJSMinMax('screenresolution', $minMaxScreenResolution, 'screenresolution_modal');
-      echo generateJSMinMax('screensize', $minMaxScreenSize, 'screensize_modal');
-      echo generateJSMinMax('cpufrequency', $minMaxCPUFrequency, 'cpufrequency_modal');
-      echo generateJSMinMax('cpucore', $minMaxCPUCore, 'cpucore_modal');
-      echo generateJSMinMax('ram', $minMaxRAM, 'ram_modal');
-      echo generateJSMinMax('cameraresolution', $minMaxCameraResolution, 'cameraresolution_modal');
-      echo generateJSMinMax('frontcameraresolution', $minMaxFrontCameraResolution, 'frontcameraresolution_modal');
-      echo generateJSMinMax('sizeheigh', $minMaxSizeHeigh, 'sizeheigh_modal');
-      echo generateJSMinMax('sizewidth', $minMaxSizeWidth, 'sizewidth_modal');
-      echo generateJSMinMax('sizethickness', $minMaxSizeThickness, 'sizethickness_modal');
-      echo generateJSMinMax('weight', $minMaxWeight, 'weight_modal');
-      echo generateJSMinMax('batterycapacity', $minMaxBatteryCapacity, 'batterycapacity_modal');
-      echo generateJSMinMax('storage', $minMaxStorage, 'storage_modal');
-      
-      if (isset($arrayCriterias)){
-        if (key_exists('criterias', $arrayCriterias)){
-          forEach($arrayCriterias['criterias'] as $key => $value){
-            echo "addSelectCriteria('$key', {'value' : '$value'});";
-          }
-        }
-        if (key_exists('priority', $arrayCriterias)) {
-          forEach($arrayCriterias['priority'] as $p){
-            echo "addSortingInit('". $p['priority'] . "','".$p['order']."');";      
-          }
-        }
+ <?php require './view/app/login-modal.php'; ?>
+    
+<!-- jQuery is required by Materialize to function -->
+  <script type="text/javascript" src="./view/app/bower_components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="./view/app/bower_components/Materialize/bin/materialize.js"></script>
+  <script type="text/javascript" src="./view/app/bower_components/Materialize/extras/noUiSlider/nouislider.min.js"></script>
 
-      }
-      ?>
-    </script>
-  </body>
+    
+  <script type="text/javascript" src="http://localhost:8080/test.js"></script>
+  <script type="text/javascript">
+  $(".button-collapse").sideNav();
+  $(document).ready(function() {
+      $('select').material_select();
+  });
+  var slider = document.getElementById('price-slider');
+  noUiSlider.create(slider, {
+      start: [0, 100],
+      connect: true,
+      step: 1,
+      range: {
+          'min': 0,
+          'max': 100
+      },
+      format: wNumb({
+          decimals: 0
+      })
+  });
 
-  </html>
+  $('.modal-trigger').leanModal({
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      opacity: .5, // Opacity of modal background
+      in_duration: 300, // Transition in duration
+      out_duration: 200, // Transition out duration
+      ready: function() {}, // Callback for Modal open
+      complete: function() {} // Callback for Modal close
+  });
+  </script>
+</body>
+
+</html>

@@ -1,69 +1,63 @@
 <?php
 
-require_once (__DIR__ . '/../exception/ConnectionNotSetException.php');
+/**
+ * A geric Factory
+ *
+ * @author sowf
+ */
+require_once (__DIR__.'/../exception/ConnectionNotSetException.php');
 
 abstract class Factory {
-
     /**
      * The connection to the Database 
      */
     protected $connection;
-
-    /**
+    
+     /**
      * Private constructor to avoid creating a new Factory
      * @param Connection $connection
      */
     public function __construct() {
-        
     }
-
+    
+    
     /**
      * Sets the Factory's connection to the DB
      * @param Connection $connection
      */
     public function setConnection(Connection $connection) {
-        if (!$connection->isConnected()) {
-            $connection->connect();
-        }
+      if(!$connection->isConnected()){
+        $connection->connect();
+      }
         $this->connection = $connection;
     }
-
+    
     public function unsetConnection() {
-        $this->connection = NULL;
+      $this->connection = NULL;
     }
-
-    /**
+    
+     /**
      * cheks if the connection has been initiated
      * @return true if the connection has been initiated, false otherwise
      */
-    public function isConnectionSet() {
-        return !is_null($this->connection);
+    public function isConnectionSet(){
+        return ! is_null($this->connection);
     }
-
-    /**
+    
+     /**
      * creates a String to be used as a complement to the sql request to be sent to create a new oject managed by the factory
      * @param Provider $object the provider
      * @return String, a string reprenting the object
      */
-    protected abstract function toSql($object);
-
-    protected function paramToSql($param) {
-        if (is_null($param)) {
-            return "NULL";
-        }
-        if (is_bool($param) || is_numeric($param)) {
-            return $param;
-        }
-        return "'" . $param . "'";
-    }
-
+    protected abstract function toSql($object); 
+    
     /**
      * Transform th given record into an object
      * @param $record the record to be transformed
      * @return String, a string reprenting the object
      */
     protected abstract function toObject($record);
-
+     
     /**
      * requests all object managed by th subclass from the DB
      * @param tableName, the table containing objects managed 
@@ -71,12 +65,12 @@ abstract class Factory {
      * @return $record, a collections of retrieved objects or null if the connection has not been set yet
      */
     public function getAll($tableName) {
-        if ($this->isConnectionSet()) {
+        if($this->isConnectionSet()){
             $objects = array();
-            $sql = "select * from " . $tableName . " order by id DESC";
-            $record = $this->connection->executeQuery($sql);
-            if ($record) {
-                foreach ($record as $object) {
+            $sql="select * from ".$tableName;
+            $record=$this->connection->executeQuery($sql);
+            if($record){
+                foreach ($record as $object){
                     $objects[] = $this->toObject($object);
                 }
             }
@@ -92,13 +86,13 @@ abstract class Factory {
      * @throws ConnectionNotSetException
      * @return Provider, the corresponding object; null if the connection is not set yet or the provider does not exst
      */
-    public function findById($tableName, $id) {
-        if ($this->isConnectionSet()) {
-            $objects = array();
-            $sql = "select * from " . $tableName . " where id=" . $id;
-            $record = $this->connection->executeQuery($sql);
-            if ($record) {
-                foreach ($record as $object) {
+    public function findById($tableName,$id) {
+        if($this->isConnectionSet()){
+            $objects = array();  
+            $sql="select * from ".$tableName." where id=".$id;
+            $record=$this->connection->executeQuery($sql);
+            if($record){
+                foreach ($record as $object){
                     $objects[] = $this->toObject($object);
                 }
             }
@@ -106,24 +100,22 @@ abstract class Factory {
         }
         throw new ConnectionNotSetException();
     }
-
-    public function findByCriteria($tableName, $criteria) {
-        if ($this->isConnectionSet()) {
-            $objects = array();
-            $sql = "select * from " . $tableName . " where " . $criteria;
-            if (!is_null($criteria) && !$criteria == "") {
-                $record = $this->connection->executeQuery($sql);
-                if ($record) {
-                    foreach ($record as $object) {
-                        $objects[] = $this->toObject($object);
-                    }
+    
+    public function findByCriteria($tableName,$criteria){
+      if($this->isConnectionSet()){
+          $objects = array();  
+            $sql="select * from ".$tableName." where ".$criteria;
+            $record=$this->connection->executeQuery($sql);
+            if($record){
+                foreach ($record as $object){
+                    $objects[] = $this->toObject($object);
                 }
             }
             return $objects;
         }
         throw new ConnectionNotSetException();
     }
-
+    
     /**
      * deletes the line corresponding to the given object
      * @param tableName, the table containing objects managed 
@@ -131,14 +123,15 @@ abstract class Factory {
      * @throws ConnectionNotSetException
      * @return int, an integer corresponding to the number of lines deleted; 0 if the connection is not set yet or no line has been modified
      */
-    public function delete($tableName, $id) {
-        if ($this->isConnectionSet()) {
-            $sql = "delete from " . $tableName . " where id = " . $id;
+    public function delete($tableName,$id) {
+        if($this->isConnectionSet()){
+            $sql="delete from ".$tableName." where id = ".$id;
             return $this->connection->executeDelete($sql);
+            
         }
         throw new ConnectionNotSetException();
     }
-
+    
     /**
      * updates the line corresponding to the givin id
      * @param type $tableName the id of the provider to be updated
@@ -147,61 +140,50 @@ abstract class Factory {
      * @throws ConnectionNotSetException
      * @return int, an integer corresponding to the number of lines updated; 0 if the connection is not set yet or no line has been modified
      */
-    public function update($tableName, $id, $fields) {
-        if ($this->isConnectionSet() && $fields) {
-            $sql = "update " . $tableName . " set ";
+    public function update($tableName,$id,$fields){
+        if($this->isConnectionSet() && $fields){
+            $sql="update ".$tableName." set ";
             foreach ($fields as $key => $value) {
-                $sql.= $key . " = " . $this->paramToSql($value);
+               $sql.= $key."=".$value; 
             }
-            $sql.=" where id = " . $id;
+            $sql.=" where id=".$id;
             return $this->connection->executeUpdate($sql);
         }
-        throw new ConnectionNotSetException();
+         throw new ConnectionNotSetException();
     }
-
+    
     /**
      * create a new provider out of the given object representing a provider
      * @param type $tableName the id of the provider to be updated
      * @param type $provider the new provider
      * @throws ConnectionNotSetException
      */
-    public function create($object) {
-        if ($this->isConnectionSet()) {
-            $sql = $this->toSql($object);
-            return $this->connection->executeCreate($sql);
+    public function create($object){
+         if($this->isConnectionSet()){
+             $sql = $this->toSql($object);
+             return $this->connection->executeCreate($sql);
         }
         throw new ConnectionNotSetException();
     }
-
-    /**
-     * A function to return distinct values of a table's text field 
-     *
-     */
-    protected function getListTextFieldValues($tableName, $textfieldName) {
+  /**
+  * A function to return distinct values of a table's text field 
+  *
+  */
+   protected function getListTextFieldValues($tableName,$textfieldName) {
         if ($this->isConnectionSet()) {
-            $sql = "select distinct(" . $textfieldName . ") from " . $tableName . " where " . $textfieldName . " is not null order by 1";
+            $sql = "select distinct(" . $textfieldName . ") from ".$tableName;
             $values = $this->connection->executeQuery($sql);
             return $values;
         }
         throw new ConnectionNotSetException();
     }
-
-    protected function getMinMax($tableName, $fieldName) {
+  
+   protected function getListTextFieldValuesAndType($schema, $tableName) {
         if ($this->isConnectionSet()) {
-            $sql = "select COALESCE(ceiling(min(" . $fieldName . ")), 0) as minValue, COALESCE(ceiling(max(" . $fieldName . ")), 0) as maxValue from " . $tableName;
-            $values = $this->connection->executeQuery($sql)[0];
-            return $values;
-        }
-        throw new ConnectionNotSetException();
-    }
-
-    protected function getListTextFieldValuesAndType($schema, $tableName) {
-        if ($this->isConnectionSet()) {
-            $sql = "select column_name, data_type from information_schema.columns where table_schema = '" . $schema . "' and table_name = '" . $tableName . "'";
+            $sql = "select column_name, data_type from information_schema.columns where table_schema = '".$schema."' and table_name = '".$tableName."'";
             $values = $this->connection->executeQuery($sql);
             return $values;
         }
         throw new ConnectionNotSetException();
     }
-
 }

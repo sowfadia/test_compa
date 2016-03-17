@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * The user class
+ *
+ * @author sowf
+ */
 class User {
     private $id;
     private $firstName;

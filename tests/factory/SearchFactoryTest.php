@@ -56,38 +56,4 @@ class SearchFactoryTest extends PHPUnit_Framework_TestCase {
         $this->assertNotNull($return);
     } 
     
-   /**
-      * @test
-      */
-     public function shouldExecuteSearchCRUD(){
-         $user=new User(-1,"searchUser", "searchUser", "sowfadia@sowfadia.com", "searchUser",(new DateTime())->getTimestamp());
-         UserFactory::getInstance()->setConnection(static::$con);
-         UserFactory::getInstance()->createUser($user);
-         $criteria = "email like '" . $user->getEmail(). "'";
-         $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);
-         $this->assertNotNull($USER_FROM_DB);
-         
-         $search = new Search(-1,$USER_FROM_DB[0]->getId(), NULL , NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-         SearchFactory::getInstance()->setConnection(self::$con);
-         $this->assertTrue(SearchFactory::getInstance()->isConnectionSet());
-         $createReturn = SearchFactory::getInstance()->createSearch($search);
-         $this->assertNotNull($createReturn);
-         $this->assertEquals(1,$createReturn);  
-         $criteria = array();
-         $criteria['iduser'] = $USER_FROM_DB[0]->getId();
-         $searches = SearchFactory::getInstance()->findByCriteriaImpl($criteria);
-         $this->assertEquals($USER_FROM_DB[0]->getId(),$searches[0]->getUser());
-         $fields['brand'] = "Samsung";
-         $updateReturn = SearchFactory::getInstance()->updateSearch($searches[0]->getId(),$fields);
-         $this->assertNotNull($updateReturn);
-         $this->assertEquals(1,$updateReturn);
-         $searches = SearchFactory::getInstance()->findSearchById($searches[0]->getId());
-         $this->assertEquals("Samsung",$searches[0]->getBrand());
-         $deleteReturn = SearchFactory::getInstance()->deleteSearch($searches[0]->getId());
-         $this->assertNotNull($deleteReturn);
-         $this->assertEquals(1,$deleteReturn);  
-         $nbrow = UserFactory::getInstance()->deleteUser($USER_FROM_DB[0]->getId());
-     } 
-     
-    
 }

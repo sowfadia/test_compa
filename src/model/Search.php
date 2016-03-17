@@ -1,8 +1,13 @@
 <?php
 
+/**
+ * The research class
+ *
+ * @author sowf
+ */
 class Search {
     private $id;
-    private $iduser;
+    private $user;
     private $brand;
     private $priceMin;
     private $priceMax;
@@ -44,7 +49,7 @@ class Search {
     
     function __construct($id, $user, $brand, $priceMin, $priceMax, $warranty, $waterproof, $screenDefinition, $screenResolutionMin, $screenResolutionMax, $screenSizeMin, $screenSizeMax, $screenPanel, $CPUModel, $CPUFrequencyMin, $CPUFrequencyMax, $CPUCoreMin, $CPUCoreMax, $RAMMin, $RAMMax, $cameraResolutionMin, $cameraResolutionMax, $frontCameraResolutionMin, $frontCameraResolutionMax, $flash, $sizeHeighMin, $sizeHeighMax, $sizeWidthMin, $sizeWidthMax, $sizeThicknessMin, $sizeThicknessMax, $weightMin, $weightMax, $batteryCapacityMin, $batteryCapacityMax, $storageMin, $storageMax, $externalStorage, $software, $dateInsert) {
         $this->id = $id;
-        $this->iduser = $user;
+        $this->user = $user;
         $this->brand = $brand;
         $this->priceMin = $priceMin;
         $this->priceMax = $priceMax;
@@ -90,7 +95,7 @@ class Search {
     }
 
     function getUser() {
-        return $this->iduser;
+        return $this->user;
     }
 
     function getBrand() {
@@ -250,7 +255,7 @@ class Search {
     }
 
     function setUser($user) {
-        $this->iduser = $user;
+        $this->user = $user;
     }
 
     function setBrand($brand) {

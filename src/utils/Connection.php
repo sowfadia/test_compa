@@ -36,7 +36,7 @@ class Connection{
         } else if ($this->dbType == "pgsql") {
             $this->pdo = new PDO('pgsql:dbname='.$this->dataBase.';host='.$this->server, $this->user, $this->password);
         } else {
-            throw new Exception("Error while connecting to the DB (".$this->dbType.")");
+            throw new Exception("Error while connecting to the DB");
         }
     }
     
@@ -61,9 +61,10 @@ class Connection{
         $returnedBool = $query->execute();
         if($returnedBool) {
             while($row=$query->fetch()){
-                array_push($record, $row);
-            }
-            return $record;
+           // $record[]=$row;
+          array_push($record, $row);
+        }
+        return $record;
         } else throw new Exception("Sql execution did not succeed with sql = ".$sql, null, null);
       }
       throw new Exception("Connection not established yet or wrong sql", null, null);

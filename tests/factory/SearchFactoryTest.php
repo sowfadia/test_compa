@@ -67,7 +67,7 @@ class SearchFactoryTest extends PHPUnit_Framework_TestCase {
          $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);
          $this->assertNotNull($USER_FROM_DB);
          
-         $search = new Search(-1,$USER_FROM_DB[0]->getId(), NULL , NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+         $search = new Search(-1,$USER_FROM_DB[0]->getId(), NULL , NULL, NULL);
          SearchFactory::getInstance()->setConnection(self::$con);
          $this->assertTrue(SearchFactory::getInstance()->isConnectionSet());
          $createReturn = SearchFactory::getInstance()->createSearch($search);

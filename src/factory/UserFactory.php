@@ -106,7 +106,6 @@ class UserFactory extends Factory {
 
     public function authenticateUser($email, $password) {
         $param = "email like '$email' and password like '$password'";
-
         return parent::findByCriteria($this->tableName, $param);
     }
 }

@@ -89,11 +89,11 @@ class ProviderFactory extends Factory{
                      .$this->paramToSql($provider->getTelephone()).","
                      .$this->paramToSql($provider->getContactpage()).","
                      .$this->paramToSql($provider->getAddress()).","
+                     .$this->paramToSql($provider->getPassword()).","
                      .$this->paramToSql($provider->getContactpreference()).","
-                     .$this->paramToSql($provider->getDescription()).","
                      .$this->paramToSql($provider->getProfil()).","
-                     .$this->paramToSql($provider->getUrlProducts()).","
-                     .$this->paramToSql($provider->getPassword()).")";
+                     .$this->paramToSql($provider->getDescription()).","
+                     .$this->paramToSql($provider->getUrlProducts()).")";
          }
          throw new Exception("the parameter is not an instance of Provider, param = ".$provider, null, null);
     }

@@ -70,8 +70,8 @@ class LinksFactoryTest extends PHPUnit_Framework_TestCase {
          $provider=new Provider(-1,"provider", "sowfadia@fds.com", "03030303",NULL,NULL,NULL,NULL,NULL,NULL,"urlproducts");
          ProviderFactory::getInstance()->setConnection(static::$con);
          ProviderFactory::getInstance()->createProvider($provider);
-         $criteria['email'] = $provider->getEmail();
-         $PROVIDER_FROM_DB = ProviderFactory::getInstance()->findByCriteriaImpl($criteria);
+         $criteriaP['email'] = $provider->getEmail();
+         $PROVIDER_FROM_DB = ProviderFactory::getInstance()->findByCriteriaImpl($criteriaP);
          $this->assertNotNull($PROVIDER_FROM_DB);
          
          $link = new Links(-1,$USER_FROM_DB[0]->getId(), $PROVIDER_FROM_DB[0]->getId() , (new DateTime())->getTimestamp());

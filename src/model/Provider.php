@@ -58,7 +58,7 @@ class Provider {
     function getContactpreference() {
         return $this->contactpreference;
     }
-  
+
     function getProfil() {
         return $this->profil;
     }
@@ -91,8 +91,8 @@ class Provider {
         $this->contactpage = $contactpage;
     }
 
-    function setAddresse($address) {
-        $this->adress = $address;
+    function setAddress($address) {
+        $this->address = $address;
     }
 
     function setPassword($password) {
@@ -103,7 +103,7 @@ class Provider {
         $this->contactpreference = $contactpreference;
     }
 
-    function setProfile($profil) {
+    function setProfil($profil) {
         $this->profil = $profil;
     }
 

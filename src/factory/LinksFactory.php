@@ -19,7 +19,7 @@ class LinksFactory extends Factory {
     }
 
   public function createLink($link) {
-        return parent::create($this->tableName, $link);
+        return parent::create($link);
     }
     
     public function findLinkById($id) {
@@ -40,7 +40,6 @@ class LinksFactory extends Factory {
         );
     }
     protected function toSql($link) {
-        echo $link;
         return "insert into ".$this->tableName." (\"iduser\",\"idprovider\") values (" 
                 . $this->paramToSql($link->getIdUser()).",".$this->paramToSql($link->getIdProvider()).")";
     }

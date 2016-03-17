@@ -9,7 +9,7 @@ class ConnectionTest extends PHPUnit_Framework_TestCase{
      * @test 
      */
     public function shouldCreateConnectionObject(){
-        $con = new Connection(DB_HOST,DB_PORT,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);
+        $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);
         $this->assertNotNull($con);
     }
     

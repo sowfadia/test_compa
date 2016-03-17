@@ -36,7 +36,7 @@ li.input {
     right: 0;
     top: 120px;
     margin-top: 1px;
-    padding: 1px 0 0 0;
+    padding: 1px 15px;
     z-index: 2;
 }
 
@@ -84,4 +84,34 @@ li.input:hover {
 
 .vertical-scroll-container {
     white-space: nowrap;
+}
+
+.card-title{
+    white-space : initial;
+}
+
+/* Criteria */
+
+.criteria-prop-container {
+    width: 320px;
+    height: 100%;
+    padding-left: 2em;
+    margin-right: 2em;
+    position: relative;
+    display: inline-block;
+    float: left !important;
+}
+
+.dropdown-content {
+    max-height: 300px;
+}
+.notifKo {
+    text-align: center;
+    color: crimson !important;
+    font-weight: bold;
+}
+.notifOk {
+    text-align: center;
+    color: green !important;
+    font-weight: bold;
 }

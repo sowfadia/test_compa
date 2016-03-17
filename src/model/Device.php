@@ -1,10 +1,5 @@
 <?php
 
-/**
- * The class representing a device
- *
- * @author sowf
- */
 class Device {
     private $id;
     private $provider;
@@ -32,8 +27,10 @@ class Device {
     private $storage;
     private $externalStorage;
     private $software;
+    private $image;
+    private $idfromprovider;
     
-    function __construct($id, $provider, $brand, $model, $price, $warranty, $waterproof, $screenDefinition,$screenResolution, $screenSize, $screenPanel, $CPUModel, $CPUFrequency, $CPUCore, $RAM, $cameraResolution, $frontCameraResolution, $flash, $sizeHeigh, $sizeWidth, $sizeThickness, $weight, $batteryCapacity, $storage, $externalStorage, $software) {
+    function __construct($id, $provider, $brand, $model, $price, $warranty, $waterproof, $screenDefinition,$screenResolution, $screenSize, $screenPanel, $CPUModel, $CPUFrequency, $CPUCore, $RAM, $cameraResolution, $frontCameraResolution, $flash, $sizeHeigh, $sizeWidth, $sizeThickness, $weight, $batteryCapacity, $storage, $externalStorage, $software, $image,$idfromprovider) {
         $this->id = $id;
         $this->provider = $provider;
         $this->brand = $brand;
@@ -60,7 +57,23 @@ class Device {
         $this->storage = $storage;
         $this->externalStorage = $externalStorage;
         $this->software = $software;
+        $this->image = $image;
+        $this->idfromprovider = $idfromprovider;
     }
+    
+    function getIdFromProvider(){
+        return $this->idfromprovider;
+    }
+    function setIdFromProvider($idfromprovider){
+        $this->idfromprovider = $idfromprovider;
+    }
+    function getImage() {
+         return $this->image;
+     }
+ 
+     function setImage($image) {
+         $this->image = $image;
+    }  
 
     function getId() {
         return $this->id;

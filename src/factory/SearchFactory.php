@@ -37,16 +37,7 @@ class SearchFactory extends Factory {
     public function findSearchById($id) {
         return parent::findById($this->tableName, $id);
     }
-
-    public function findSearchesByUser($userId) {
-        $sql = "select * from device where user=" . $userId;
-        $record = $this->connection->executeQuery($sql);
-        if ($record) {
-            return $this->createDevice($record[0]);
-        }
-        return null;
-    }
-
+    
     public function deleteSearch($id) {
         return parent::delete($this->tableName, $id);
     }
@@ -61,12 +52,21 @@ class SearchFactory extends Factory {
 
     protected function toObject($record) {
         return new Search(
-                $record['id'], $record['iduser'], $record['brand'], $record['pricemin'], $record['pricemax'], $record['warranty'], $record['waterproof'], $record['screendefinition'], $record['screenresolutionmin'], $record['screenresolutionmax'], $record['screensizemin'], $record['screensizemax'], $record['screenpanel'], $record['cpumodel'], $record['cpufrequencymin'], $record['cpufrequencymax'], $record['cpucoremin'], $record['cpucoremax'], $record['rammin'], $record['rammax'], $record['cameraresolutionmin'], $record['cameraresolutionmax'], $record['frontcameraresolutionmin'], $record['frontcameraresolutionmax'], $record['flash'], $record['sizeheighmin'], $record['sizeheighmax'], $record['sizewidthmin'], $record['sizewidthmax'], $record['sizethicknessmin'], $record['sizethicknessmax'], $record['weightmin'], $record['weightmax'], $record['batterycapacitymin'], $record['batterycapacitymax'], $record['storagemin'], $record['storagemax'], $record['externalstorage'], $record['software'], $record['dateinsert']
+                $record['id'], 
+                $record['iduser'], 
+                $record['frequency'], 
+                $record['dateinsert'],
+                $record['url']
         );
     }
 
-    protected function toSql($search) {
-        
+        protected function toSql($search) {
+        if(!is_null($search) && ($search instanceof Search)){
+            return "insert into ".$this->tableName."(\"iduser\",\"frequency\",\"url\") values ("
+                     . $this->paramToSql($search->getIduser()) . "," . $this->paramToSql($search->getFrequency()) . ","
+                     . $this->paramToSql($search->getId()).")";
+         }
+        throw new Exception("the parameter is not an instance of Search ", null, null);
     }
 
     public function findByCriteriaImpl($criterias) {
@@ -96,11 +96,11 @@ class SearchFactory extends Factory {
 
     public function insertSearch($idUser, $url) {
         if ($this->isConnectionSet()) {
-            $sqlSearch = "select count(*) from compa.search where (url) like ('$url') and iduser = $idUser";
+            $sqlSearch = "select count(*) ".$this->tableName." where (url) like ('$url') and iduser = $idUser";
             $recordSearch = $this->connection->executeQuery($sqlSearch);
 
             if ($recordSearch[0]['count'] == 0) {
-                $sql = "insert into compa.search (iduser, url)
+                $sql = "insert into ".$this->tableName." (iduser, url)
                     values ($idUser, '$url');";
 
                 $record = $this->connection->executeQuery($sql);
@@ -111,7 +111,7 @@ class SearchFactory extends Factory {
 
     public function retrieveSearchByUser($idUser) {
         if ($this->isConnectionSet()) {
-            $sql = "select * from compa.search where iduser = $idUser order by frequency, dateinsert DESC";
+            $sql = "select * from ".$this->tableName." where iduser = $idUser order by frequency, dateinsert DESC";
 
             $record = $this->connection->executeQuery($sql);
             return $record;

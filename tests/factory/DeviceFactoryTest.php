@@ -94,7 +94,7 @@ class DeviceFactoryTest extends PHPUnit_Framework_TestCase{
       * @test
       */
      public function shouldExecuteDeviceCRUD(){
-         $device = new Device(-1,1, "MyTestBrandName", "S6", 800, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+         $device = new Device(-1,1, "MyTestBrandName", "S6", 800, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
          DeviceFactory::getInstance()->setConnection(self::$con);
          $this->assertTrue(DeviceFactory::getInstance()->isConnectionSet());
          $createReturn = DeviceFactory::getInstance()->createDevice($device);

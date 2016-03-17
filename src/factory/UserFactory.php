@@ -37,7 +37,7 @@ class UserFactory extends Factory {
      * @return int, an integer corresponding to the number of lines deleted; 0 if the connection is not set yet or no line has been modified
      */
     public function getUsers() {
-        return parent::getAll($this->tableName);
+        return parent::getAll(static::$tableName);
     }
 
     /**
@@ -55,7 +55,7 @@ class UserFactory extends Factory {
      * @return int, an integer corresponding to the number of lines deleted; 0 if the connection is not set yet or no line has been modified
      */
     public function deleteUser($id) {
-        return parent::delete(self::$tableName, $id);
+        return parent::delete(static::$tableName, $id);
     }
 
     /**
@@ -65,7 +65,7 @@ class UserFactory extends Factory {
      * @return int, an integer corresponding to the number of lines updated; 0 if the connection is not set yet or no line has been modified
      */
     public function updateUser($id, $fields) {
-        return parent::update(self::$tableName, $id, $fields);
+        return parent::update(static::$tableName, $id, $fields);
     }
 
     /**

@@ -59,10 +59,10 @@ class ProviderFactoryTest extends PHPUnit_Framework_TestCase {
     /**
       * @test
       */
-     public function shouldExecuteStatsCRUD(){   
+     public function shouldExecuteProviderCRUD(){   
          ProviderFactory::getInstance()->setConnection(self::$con);
          $this->assertTrue(ProviderFactory::getInstance()->isConnectionSet());
-         $provider=new Provider(-1,"provider", "sowfadia@fds.com", "03030303",NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+         $provider=new Provider(-1,"provider", "sowfadia@fds.com", "03030303",NULL,NULL,NULL,NULL,NULL,NULL,"urlproducts");
          $createReturn = ProviderFactory::getInstance()->createProvider($provider);
          $this->assertNotNull($createReturn);
          $this->assertEquals(1,$createReturn);  

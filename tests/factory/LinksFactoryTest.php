@@ -59,15 +59,15 @@ class LinksFactoryTest extends PHPUnit_Framework_TestCase {
     /**
       * @test
       */
-     public function shouldExecuteSearchCRUD(){
+     public function shouldExecuteLinksCRUD(){
          $user=new User(-1,"linkUser", "linkUser", "sowfadia@fds.com", "searchUser",(new DateTime())->getTimestamp());
          UserFactory::getInstance()->setConnection(static::$con);
          UserFactory::getInstance()->createUser($user);
-         $criteria['email'] = $user->getEmail();
+         $criteria = "email like '" . $user->getEmail(). "'";
          $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);
          $this->assertNotNull($USER_FROM_DB);
          
-         $provider=new Provider(-1,"provider", "sowfadia@fds.com", "03030303",NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+         $provider=new Provider(-1,"provider", "sowfadia@fds.com", "03030303",NULL,NULL,NULL,NULL,NULL,NULL,"urlproducts");
          ProviderFactory::getInstance()->setConnection(static::$con);
          ProviderFactory::getInstance()->createProvider($provider);
          $criteria['email'] = $provider->getEmail();

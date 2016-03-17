@@ -59,7 +59,7 @@ class SurveyFactoryTest extends PHPUnit_Framework_TestCase {
     /**
       * @test
       */
-     public function shouldExecuteSearchCRUD(){
+     public function shouldExecuteSurveyCRUD(){
          $user=new User(-1,"searchUser", "searchUser", "sowfadia@fds.com", "searchUser",(new DateTime())->getTimestamp());
          UserFactory::getInstance()->setConnection(static::$con);
          UserFactory::getInstance()->createUser($user);

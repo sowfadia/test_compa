@@ -2,6 +2,9 @@
   <testsuites>
     <testsuite name="test">
       <directory>../tests</directory>
+      <exclude>../src/controller/</exclude>
+      <exclude>../src/exeption/</exclude>
+      <exclude>../src/view/</exclude>
     </testsuite>
   </testsuites>
   

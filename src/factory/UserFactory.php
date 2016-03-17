@@ -5,7 +5,7 @@ require_once (__DIR__ . '/../model/User.php');
 
 class UserFactory extends Factory {
 
-    private $tableName = "compa.users";
+    protected static $tableName = "compa.users";
 
     /**
      * The single instance of the factory
@@ -46,7 +46,7 @@ class UserFactory extends Factory {
      * @return int, an integer corresponding to the number of lines deleted; 0 if the connection is not set yet or no line has been modified
      */
     public function findUserById($id) {
-        return parent::findById(self::$tableName, $id);
+        return parent::findById(static::$tableName, $id);
     }
 
     /**
@@ -101,7 +101,7 @@ class UserFactory extends Factory {
     }
 
     public static function getTableName() {
-        return self::$tableName;
+        return static::$tableName;
     }
 
     public function authenticateUser($email, $password) {

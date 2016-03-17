@@ -40,6 +40,7 @@ class LinksFactory extends Factory {
         );
     }
     protected function toSql($link) {
+        echo $link;
         return "insert into ".$this->tableName." (\"iduser\",\"idprovider\") values (" 
                 . $this->paramToSql($link->getIdUser()).",".$this->paramToSql($link->getIdProvider()).")";
     }

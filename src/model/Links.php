@@ -32,7 +32,7 @@ class Links {
     function setIduser($iduser) {
         $this->iduser = $iduser;
     }
-    function setIdprovder($idprovder) {
+    function setIdprovder($idprovider) {
         $this->idprovider = $idprovider;
     }
     function setDateinsert($dateinsert) {

@@ -17,7 +17,7 @@ class ProviderFactoryTest extends PHPUnit_Framework_TestCase {
     
     public static function setUpBeforeClass() {
       $con = new Connection(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_TYPE);  
-      self::$con = $con;
+      static::$con = $con;
     }
     
     /**
@@ -32,7 +32,7 @@ class ProviderFactoryTest extends PHPUnit_Framework_TestCase {
      * @test
      */
     public function shouldGetProviders(){
-        ProviderFactory::getInstance()->setConnection(self::$con);
+        ProviderFactory::getInstance()->setConnection(static::$con);
         $this->assertTrue(ProviderFactory::getInstance()->isConnectionSet());
         $providers = ProviderFactory::getInstance()->getProviders();
         $this->assertNotNull($providers);
@@ -51,9 +51,41 @@ class ProviderFactoryTest extends PHPUnit_Framework_TestCase {
      * @test
      */
     public function shouldFindProvider(){
-        ProviderFactory::getInstance()->setConnection(self::$con);//to unset the connection already set before
+        ProviderFactory::getInstance()->setConnection(static::$con);//to unset the connection already set before
         $return=ProviderFactory::getInstance()->findProviderById(1);
         $this->assertNotNull($return);
     } 
+    
+    /**
+      * @test
+      */
+     public function shouldExecuteStatsCRUD(){   
+         ProviderFactory::getInstance()->setConnection(self::$con);
+         $this->assertTrue(ProviderFactory::getInstance()->isConnectionSet());
+         $provider=new Provider(-1,"provider", "sowfadia@fds.com", "03030303",NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+         $createReturn = ProviderFactory::getInstance()->createProvider($provider);
+         $this->assertNotNull($createReturn);
+         $this->assertEquals(1,$createReturn);  
+         $criteria['email'] = $provider->getEmail();
+         $PROVIDER_FROM_DB = ProviderFactory::getInstance()->findByCriteriaImpl($criteria);
+         $this->assertNotNull($PROVIDER_FROM_DB);
+         $this->assertTrue(count($PROVIDER_FROM_DB) > 0);
+         
+         $fields['name'] = "fff";
+         $updateReturn = ProviderFactory::getInstance()->updateProvider($PROVIDER_FROM_DB[0]->getId(),$fields);
+         $this->assertNotNull($updateReturn);
+         $this->assertEquals(1,$updateReturn);
+         $providers = ProviderFactory::getInstance()->findProviderById($PROVIDER_FROM_DB[0]->getId());
+         $this->assertEquals("fff",$providers[0]->getName());
+         $this->assertEquals(-1,$providers[0]->getN());
+         $this->assertEquals("sowfadia@fds.com",$providers[0]->getEmail());
+         $this->assertEquals("03030303",$providers[0]->getTelephone());
+         $this->assertEquals(NULL,$providers[0]->getContactpage());
+         
+         
+         $deleteReturn = ProviderFactory::getInstance()->deleteProvider($providers[0]->getId());
+         $this->assertNotNull($deleteReturn);
+         $this->assertEquals(1,$deleteReturn);  
+     }    
     
 }

@@ -64,8 +64,10 @@ class Connection{
                 array_push($record, $row);
             }
             return $record;
-        } else throw new Exception("Sql execution did not succeed with sql = ".$sql, null, null);
-      }
+        } else {
+            throw new Exception("Sql execution did not succeed with sql = ".$sql, null, null);
+            }
+        }
       throw new Exception("Connection not established yet or wrong sql", null, null);
   }
   
@@ -81,7 +83,9 @@ class Connection{
       $returnedBool = $query->execute();
       if($returnedBool) {
           return $query->rowCount();
-      } else throw new Exception("Sql execution did not succeed with sql = ".$sql, null, null);
+      } else {
+          throw new Exception("Sql execution did not succeed with sql = ".$sql, null, null);
+      }
     }
     throw new Exception("Connection not established yet or wrong sql", null, null);
   } 
@@ -98,8 +102,10 @@ class Connection{
       $returnedBool = $query->execute();
       if($returnedBool) {
           return $query->rowCount();
-      } else throw new Exception("Sql execution did not succeed with sql = ".$sql, null, null);
-    }
+      } else {
+          throw new Exception("Sql execution did not succeed with sql = ".$sql, null, null);
+        }     
+      }
     throw new Exception("Connection not established yet or wrong sql", null, null);
   }
   
@@ -115,7 +121,9 @@ class Connection{
       $returnedBool = $query->execute();
       if($returnedBool) {
           return $query->rowCount();
-      } else throw new Exception("Sql execution did not succeed with sql = ".$sql, null, null);
+      } else {
+          throw new Exception("Sql execution did not succeed with sql = ".$sql, null, null);
+      }
     }
     throw new Exception("Connection not established yet or wrong sql", null, null);
   }

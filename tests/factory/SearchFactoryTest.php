@@ -88,6 +88,5 @@ class SearchFactoryTest extends PHPUnit_Framework_TestCase {
          $this->assertEquals(1,$deleteReturn);  
          $nbrow = UserFactory::getInstance()->deleteUser($USER_FROM_DB[0]->getId());
      } 
-     
-    
+        
 }

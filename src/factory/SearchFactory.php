@@ -24,10 +24,10 @@ class SearchFactory extends Factory {
      * @return SearchFactory, the Factory's singleton
      */
     public static function getInstance() {
-        if (is_null(self::$instance)) {
-            self::$instance = new SearchFactory();
+        if (is_null(static::$instance)) {
+            static::$instance = new SearchFactory();
         }
-        return self::$instance;
+        return static::$instance;
     }
 
     public function getSearches() {
@@ -60,7 +60,7 @@ class SearchFactory extends Factory {
         );
     }
 
-        protected function toSql($search) {
+    protected function toSql($search) {
         if(!is_null($search) && ($search instanceof Search)){
             return "insert into ".$this->tableName."(\"iduser\",\"frequency\",\"url\") values ("
                      . $this->paramToSql($search->getIduser()) . "," . $this->paramToSql($search->getFrequency()) . ","

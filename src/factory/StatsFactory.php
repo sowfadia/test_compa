@@ -48,26 +48,34 @@ class StatsFactory extends Factory {
     public function createStats($stats) {
         return parent::create($this->tableName, $stats);
     }
+    
+    public function updateStats($id, $fields) {
+        return parent::update($this->tableName, $id, $fields);
+    }
 
     protected function toObject($record) {
         return new Stats(
                 $record['id'], $record['nbusers'], $record['nbproviders'], $record['nbsearch'], $record['nbdevices'], $record['nblinks'], $record['dateinsert']
         );
     }
+    
+    public function deleteStats($id) {
+        return parent::delete($this->tableName, $id);
+    }
 
-    protected function toSql($device) {
-        return "(" .
-                $device->getId() . "," .
-                $device->getNbusers() . "," .
-                $device->getNbproviders() . "," .
-                $device->getNbsearch() . "," .
-                $device->getNbdevices() . "," .
-                $device->getNblinks() . ")";
+     protected function toSql($stats) {
+        if(!is_null($stats) && ($stats instanceof Stats)){
+            return "insert into ".$this->tableName."(\"nbusers\",\"nbproviders\",\"nbsearch\",\"nbdevices\",\"nblinks\") values ("
+                     . $this->paramToSql($stats->getNbusers()) . "," . $this->paramToSql($stats->getNbproviders()) . ","
+                     . $this->paramToSql($stats->getNbsearch()) . "," . $this->paramToSql($stats->getNbdevices()) . ","
+                     . $this->paramToSql($stats->getNblinks()).")";
+         }
+        throw new Exception("the parameter is not an instance of Search ", null, null);
     }
 
     public function addStats($stats) {
         if ($this->isConnectionSet()) {
-            $sql = "insert into compa.stats(nbusers ,nbproviders,nbsearch,nbdevices,nblinks) 
+            $sql = "insert into ".$this->tableName."(nbusers ,nbproviders,nbsearch,nbdevices,nblinks) 
                       values (" . 
                           $stats->getNbusers() . "," .
                           $stats->getNbproviders() . "," .
@@ -79,5 +87,17 @@ class StatsFactory extends Factory {
                 return $record;
         }
     }
-
+    
+    public function findByCriteriaImpl($criterias) {
+        $criteriaString = "";
+        $nbfields = count($criterias);
+        foreach ($criterias as $key => $value) {
+            $criteriaString .= $key . " = " . $this->paramToSql($value) . "";
+            $nbfields --;
+            if ($nbfields > 0) {
+                $criteriaString .= " and ";
+            }
+        }
+        return parent::findByCriteria($this->tableName, $criteriaString);
+    }
 }

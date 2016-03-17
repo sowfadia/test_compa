@@ -59,40 +59,37 @@ class StatsFactoryTests extends PHPUnit_Framework_TestCase {
    /**
       * @test
       */
-     public function shouldExecuteStatsCRUD(){
-//         $user=new User(-1,"searchUser", "searchUser", "sowfadia@sowfadia.com", "searchUser",(new DateTime())->getTimestamp());
-//         UserFactory::getInstance()->setConnection(static::$con);
-//         UserFactory::getInstance()->createUser($user);
-//         $criteria = "email like '" . $user->getEmail(). "'";
-//         $USER_FROM_DB = UserFactory::getInstance()->findByCriteria(UserFactory::getTableName(),$criteria);
-//         $this->assertNotNull($USER_FROM_DB);
+     public function shouldExecuteStatsCRUD(){   
+         $stats = new Stats(-1,-1, -1 , -1, -1, -1);
+         StatsFactory::getInstance()->setConnection(self::$con);
+         $this->assertTrue(StatsFactory::getInstance()->isConnectionSet());
+         $createReturn = StatsFactory::getInstance()->createStats($stats);
+         $this->assertNotNull($createReturn);
+         $this->assertEquals(1,$createReturn);  
+         $criteria = array();
+         $criteria['nbusers'] = -1;
+         $criteria['nbproviders'] = -1;
+         $criteria['nbsearch'] = -1;
+         $criteria['nbdevices'] = -1;
+         $criteria['nblinks'] = -1;
+         $statss = StatsFactory::getInstance()->findByCriteriaImpl($criteria);
+         $this->assertTrue(count($statss) > 0);
          
-//         $stats = new Search(-1,0, 0 , 0, 0, 0);
-//         StatsFactory::getInstance()->setConnection(self::$con);
-//         $this->assertTrue(StatsFactory::getInstance()->isConnectionSet());
-//         $createReturn = StatsFactory::getInstance()->createSearch($stats);
-//         $this->assertNotNull($createReturn);
-//         $this->assertEquals(1,$createReturn);  
-//         $criteria = array();
-//         $criteria['nbusers'] = 0;
-//         $criteria['nbproviders'] = 0;
-//         $criteria['nbsearch'] = 0;
-//         $criteria['nbdevices'] = 0;
-//         $criteria['nblinks'] = 0;
-//         $stats = StatsFactory::getInstance()->findByCriteriaImpl($criteria);
-//         $this->assertTrue(count($stats) > 0);
-//         $fields['brand'] = "Samsung";
-//         $updateReturn = StatsFactory::getInstance()->updateSearch($searches[0]->getId(),$fields);
-//         $this->assertNotNull($updateReturn);
-//         $this->assertEquals(1,$updateReturn);
-//         $searches = StatsFactory::getInstance()->findSearchById($searches[0]->getId());
-//         $this->assertEquals("Samsung",$searches[0]->getBrand());
-//         $deleteReturn = StatsFactory::getInstance()->deleteSearch($searches[0]->getId());
-//         $this->assertNotNull($deleteReturn);
-//         $this->assertEquals(1,$deleteReturn);  
-//         $nbrow = UserFactory::getInstance()->deleteUser($USER_FROM_DB[0]->getId());
-     } 
-     
-    
+         $fields['nbdevices'] = -2;
+         $updateReturn = StatsFactory::getInstance()->updateSearch($statss[0]->getId(),$fields);
+         $this->assertNotNull($updateReturn);
+         $this->assertEquals(1,$updateReturn);
+         $statss = StatsFactory::getInstance()->findSearchById($statss[0]->getId());
+         $this->assertEquals(-2,$statss[0]->getNbdevices());
+         $this->assertEquals(-1,$statss[0]->getNbsearch());
+         $this->assertEquals(-1,$statss[0]->getNbproviders());
+         $this->assertEquals(-1,$statss[0]->getNbusers());
+         $this->assertEquals(-1,$statss[0]->getNblinks());
+         
+         
+         $deleteReturn = StatsFactory::getInstance()->deleteStats($statss[0]->getId());
+         $this->assertNotNull($deleteReturn);
+         $this->assertEquals(1,$deleteReturn);  
+     }    
 }
 

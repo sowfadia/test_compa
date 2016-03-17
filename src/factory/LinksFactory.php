@@ -40,9 +40,21 @@ class LinksFactory extends Factory {
         );
     }
     protected function toSql($link) {
-        return "insert into ".$this->tableName." (iduser,idprovider) values (" .
-                383 . "," .
-                1 . ")";
+        return "insert into ".$this->tableName." (\"iduser\",\"idprovider\") values (" 
+                . $this->paramToSql($link->getIdUser()).",".$this->paramToSql($link->getIdProvider()).")";
+    }
+    
+    public function findByCriteriaImpl($criterias) {
+        $criteriaString = "";
+        $nbfields = count($criterias);
+        foreach ($criterias as $key => $value) {
+            $criteriaString .= $key . " = " . $this->paramToSql($value) . "";
+            $nbfields --;
+            if ($nbfields > 0) {
+                $criteriaString .= " and ";
+            }
+        }
+        return parent::findByCriteria($this->tableName, $criteriaString);
     }
 }
 ?>

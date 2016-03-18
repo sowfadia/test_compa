@@ -95,13 +95,13 @@ class SurveyFactoryTest extends PHPUnit_Framework_TestCase {
     
          
          $fields['note'] = 25;
-         $updateReturn = SurveyFactory::getInstance()->updateSurvey($searches[0]->getId(),$fields);
+         $updateReturn = SurveyFactory::getInstance()->updateSurvey($surveys[0]->getId(),$fields);
          $this->assertNotNull($updateReturn);
          $this->assertEquals(1,$updateReturn);
          
          
-         $surveys = SurveyFactory::getInstance()->findSurveyById($surveys[0]->getId());
-         $this->assertEquals(25,$surveys[0]->getNote());
+         $surveyss = SurveyFactory::getInstance()->findSurveyById($surveys[0]->getId());
+         $this->assertEquals(25,$surveyss[0]->getNote());
          
          $deleteSurveyReturn = SurveyFactory::getInstance()->deleteSurvey($surveys[0]->getId());
          $this->assertNotNull($deleteSurveyReturn);

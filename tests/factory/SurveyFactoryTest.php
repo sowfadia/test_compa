@@ -90,7 +90,7 @@ class SurveyFactoryTest extends PHPUnit_Framework_TestCase {
          $surveys = SurveyFactory::getInstance()->findByCriteriaImpl($criteria);
          $this->assertNotNull($surveys);
          $this->assertEquals($USER_FROM_DB[0]->getId(),$surveys[0]->getIduser());
-         $this->assertEquals($searches[0]->getIduser(),$surveys[0]->getIdsearch());
+         $this->assertEquals($surveys[0]->getIdsearch(),$surveys[0]->getIdsearch());
          $this->assertEquals(10,$surveys[0]->getNote());
     
          

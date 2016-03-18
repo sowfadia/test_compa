@@ -57,7 +57,7 @@ class SurveyFactory extends Factory{
     }
 
     protected function toSql($survey) {
-         return "(".$survey->getId().",".$survey->getUser().",".$survey->getSearch().",".$survey->getPercentage().")";
+         return "(".$survey->getId().",".$survey->getIduser().",".$survey->getIdSearch().",".$survey->getNote().")";
 
     }
     

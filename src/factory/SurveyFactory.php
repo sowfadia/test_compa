@@ -57,7 +57,8 @@ class SurveyFactory extends Factory{
     }
 
     protected function toSql($survey) {
-         return "(".$survey->getId().",".$survey->getIduser().",".$survey->getIdSearch().",".$survey->getNote().")";
+          return "insert into ".$this->tableName."(\"iduser\",\"idsearch\",\"note\") values ("
+                     . $this->paramToSql($survey->getIduser()).",".$this->paramToSql($survey->getIdSearch()).",".$this->paramToSql($survey->getNote()).")";
 
     }
     

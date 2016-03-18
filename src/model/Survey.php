@@ -32,5 +32,16 @@ class Survey {
      function setIduser($iduser) {
          $this->iduser = $iduser;
      }
-    
+     
+     function getId() {
+         return $this->id;
+     }
+
+     function setIdsearch($idsearch) {
+         $this->idsearch = $idsearch;
+     }
+
+     function setNote($note) {
+         $this->note = $note;
+     }
 }

@@ -78,9 +78,7 @@ class SurveyFactoryTest extends PHPUnit_Framework_TestCase {
          $criteria['iduser'] = $USER_FROM_DB[0]->getId();
          $searches = SearchFactory::getInstance()->findByCriteriaImpl($criteria);
          $this->assertEquals($USER_FROM_DB[0]->getId(),$searches[0]->getIduser());
-         $this->assertEquals(NULL,$searches[0]->getUrl());
-         $this->assertEquals(NULL,$searches[0]->getFrequency());
-        
+            
          $survey = new Survey(-1,$USER_FROM_DB[0]->getId(), $searches[0]->getId() , 10);
          SurveyFactory::getInstance()->setConnection(self::$con);
          $this->assertTrue(SurveyFactory::getInstance()->isConnectionSet());

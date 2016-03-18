@@ -25,6 +25,7 @@ class ProviderFactoryTest extends PHPUnit_Framework_TestCase {
      * @expectedException ConnectionNotSetException
      */
     public function shouldNotGetProviders(){
+        ProviderFactory::getInstance()->unsetConnection();
         ProviderFactory::getInstance()->getProviders();
     }  
     
